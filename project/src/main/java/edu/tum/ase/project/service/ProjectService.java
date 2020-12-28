@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -18,17 +19,30 @@ public class ProjectService {
         return project;
     }
 
+
+
     public Project findByName(String name) {
         return projectRepository.findByName(name);
     }
 
+    public Project findById(String id) {
+        Optional<Project> project = projectRepository.findById(id);
+        if (project.isPresent()) {
+            return project.get();
+        }
+        return null;
+    }
+
     public List<Project> getProjects() {
-        // return new ArrayList<Project>();
         return projectRepository.findAll();
     }
 
-    //NOT IN EXERCISE SHEET
-    public void deleteProject(String projectName) {
-        projectRepository.delete(projectRepository.findByName(projectName));
+    public Project updateProject(Project project) {
+        projectRepository.save(project);
+        return project;
+    }
+
+    public void deleteProject(Project project) {
+        projectRepository.delete(project);
     }
 }
