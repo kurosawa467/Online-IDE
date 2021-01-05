@@ -21,7 +21,6 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
-<<<<<<< HEAD
 			<properties>
 				<activatedProperties>dev</activatedProperties>
 			</properties>
@@ -33,26 +32,6 @@
 			<id>prod</id>
 			<properties>
 				<activatedProperties>prod</activatedProperties>
-=======
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<build.profile.id>dev</build.profile.id>
-				<name>spring.profiles.active</name>
-				<value>dev</value>
-			</properties>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<build.profile.id>prod</build.profile.id>
-				<name>spring.profiles.active</name>
-				<value>prod</value>
->>>>>>> e969152909ee4b1c9a2bb009df4088a0fb60b789
 			</properties>
 		</profile>
 	</profiles>
@@ -66,6 +45,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -80,14 +60,6 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
-<<<<<<< HEAD
-=======
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<scope>test</scope>
-		</dependency>
->>>>>>> e969152909ee4b1c9a2bb009df4088a0fb60b789
 	</dependencies>
 
 	<build>
@@ -103,13 +75,6 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-<<<<<<< HEAD
-=======
-		<filters>
-			<filter>src/main/resources/application-dev.yml</filter>
-			<filter>src/main/resources/application-prod.yml</filter>
-		</filters>
->>>>>>> e969152909ee4b1c9a2bb009df4088a0fb60b789
 	</build>
 
 </project>

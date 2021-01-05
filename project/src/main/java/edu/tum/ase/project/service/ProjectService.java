@@ -19,8 +19,6 @@ public class ProjectService {
         return project;
     }
 
-
-
     public Project findByName(String name) {
         return projectRepository.findByName(name);
     }
