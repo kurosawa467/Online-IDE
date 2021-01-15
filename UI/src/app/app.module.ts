@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectComponent } from './project/project.component';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzSpinModule} from 'ng-zorro-antd/spin';
 import {NzDividerModule} from 'ng-zorro-antd/divider';
@@ -30,7 +30,7 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
 const routes: Route[] = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: LoginComponent},
-  {path: 'manage-projects', component: ProjectListComponent},
+  {path: 'manage-projects', component: ProjectComponent},
   {path: 'ide/:id', component: EditorComponent}
 ];
 
@@ -39,7 +39,7 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectListComponent,
+    ProjectComponent,
     EditorComponent,
     LoginComponent
   ],

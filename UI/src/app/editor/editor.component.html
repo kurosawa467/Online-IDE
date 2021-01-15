@@ -1,6 +1,7 @@
 <html>
 <head>
   <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
   <script src="ngConsole.js">
     angular.module("myApp", ['ngConsole']);
   </script>
@@ -32,14 +33,14 @@
         </i><span style="display: none;"></span></button>
     </div>
     <div style="text-align: center; margin-top: 20px">
-      <h3 class="ide-file-list__title ant-typography"
-          style="margin: 0; margin-bottom: 10px; color: white">{{this.project.name}}</h3>
+      <h4 class="ide-file-list__title ant-typography"
+          style="margin: 0; margin-bottom: 10px; color: white">{{this.project.name}}</h4>
     </div>
     <div style="text-align: center; margin: 0">
       <nz-table [nzData]="['']" [nzShowPagination]=false style="display: block;
 margin: auto">
         <tbody>
-        <tr *ngFor="let file of this.files"
+        <tr *ngFor="let file of this.sourcefiles"
             style=" text-align: center; background-color: #001529">
           <td style="background-color:#001529; vertical-align: center; color: white; width: 100%; height: 100%"
               class="ant-btn ant-btn-default" oncontextmenu="return false;"
@@ -62,7 +63,7 @@ margin: auto">
               (nzOnCancel)="handleCancelRename()">
               <ng-container *nzModalContent>
                 <label>
-                  <input [(ngModel)]="renamed" placeholder="{{file.name}}"/>
+                  <input [(ngModel)]="renamed" placeholder="{{renamedFile.name}}"/>
                 </label>
               </ng-container>
             </nz-modal>
@@ -75,13 +76,13 @@ margin: auto">
       <button class="ant-btn ant-btn-default" (click)="showModal()">New File</button>
       <nz-modal
         [(nzVisible)]="isVisible"
-        nzTitle="New file"
+        nzTitle="New File"
         nzOkText="Ok"
         nzCancelText="Cancel"
         (nzOnOk)="handleOk()"
         (nzOnCancel)="handleCancel()">
         <ng-container *nzModalContent>
-          <input [(ngModel)]="filename" placeholder="New file"/>
+          <input [(ngModel)]="filename" placeholder={{this.filename}}/>
         </ng-container>
       </nz-modal>
     </div>
@@ -105,14 +106,14 @@ margin: auto">
     <div style="float: left">
       <div class="ide-action-bar__container ant-row" style="background-color: #001529; height: 50px;">
         <button class="ant-btn ant-btn-default" (click)='saveFile()'><span>Save </span></button>
-        <button id="compile" [disabled]=" this.file === null || this.code !== this.file.code"
+        <button id="compile" [disabled]=" this.file === null || this.sourcecode !== this.file.sourcecode"
                 class="ant-btn ant-btn-default" style="margin-left: 5px"><span>Compile </span></button>
       </div>
       <div style="width: 800px">
         <ngx-monaco-editor id="editor" *ngIf="this.file !== null"
                            class="ng-valid ng-star-inserted ng-dirty ng-touched"
                            style="width: 800px;"
-                           [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+                           [options]="editorOptions" [(ngModel)]="sourcecode"></ngx-monaco-editor>
       </div>
     </div>
   </div>
