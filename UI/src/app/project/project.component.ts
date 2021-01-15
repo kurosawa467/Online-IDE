@@ -33,7 +33,10 @@ export class ProjectComponent implements OnInit {
     const randomName: string = uniqueNamesGenerator({
       dictionaries: [adjectives, colors, animals]
     });
-    const newProject: Project = { name: randomName, sourcefiles: new Set<SourceFile>() } as Project;
+    // const newSourceFileSet = new Set<SourceFile>();
+    const newSourceFileSet = new Array<SourceFile>();
+    // @ts-ignore
+    const newProject: Project = { name: randomName, sourcefiles: newSourceFileSet } as Project;
     console.log('newProject.name = ' + newProject.name);
     console.log('newProject.sourcefiles = ' + newProject.sourcefiles);
     this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
