@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5676de55-d1a1-4e7a-88ef-653d4574280d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../UI/.idea/UI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/main/main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/main/main1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/test/test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/test/test1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_03/servletapp/src/main/main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_03/servletapp/src/test/test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_04/restapiexample/restapiexample.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_04/servletapp/servletapp.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_05/.idea/exercise_05.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_06/.idea/exercise_06.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_06/backend/monolith (1).iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_06/backend/monolith.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_06/frontend/monolith (2).iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_06/frontend/monolith.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_06/monolith/monolith.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_08/.idea/exercise_08.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_08/springtestpyramid/springtestpyramid.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise_08/teststarter/teststarter.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mavenstarter/.idea/mavenstarter.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mavenstarter/mavenstarter.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/main/main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/main/main1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/test/test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/test/test1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project-20201217T183711Z-001/project/project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project-list-app/.idea/project-list-app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../project1/project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../servletapp/src/main/main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../servletapp/src/test/test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/ProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/ProjectApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/SourceFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/SourceFileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/SourceFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/SourceFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/service/SourceFileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/service/SourceFileService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1nCRPm0BepIPkrs4flc5B6TaL7F" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.SpringOauth2Application">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthenticationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="authentication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.tum.ase.authentication.AuthenticationApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringOauth2Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="authentication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.tum.ase.authentication.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.tum.ase.authentication.SpringOauth2Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.SpringOauth2Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5676de55-d1a1-4e7a-88ef-653d4574280d" name="Default Changelist" comment="" />
+      <created>1610892065674</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610892065674</updated>
+      <workItem from="1610892066916" duration="3680000" />
+      <workItem from="1610899021522" duration="1114000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
