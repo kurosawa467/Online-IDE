@@ -1,16 +1,22 @@
 package edu.tum.ase.project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Source;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Project")
 @Table(name = "projects")
-public class Project {
+public class Project implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -23,7 +29,8 @@ public class Project {
     // ... additional members, often include @OneToMany mappings
     @OneToMany(mappedBy = "project")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<SourceFile> sourceFileSet;
+    @JsonManagedReference
+    private Set<SourceFile> sourcefiles;
 
     protected Project() {
         // no-args constructor required by JPA spec
@@ -32,7 +39,12 @@ public class Project {
 
     public Project(String name) {
         this.name = name;
-        this.sourceFileSet = new HashSet<>();
+        this.sourcefiles = new HashSet<>();
+    }
+
+    public Project(String name, Set<SourceFile> sourceFiles) {
+        this.name = name;
+        this.sourcefiles = sourceFiles;
     }
 
     // getters and setters
@@ -51,5 +63,23 @@ public class Project {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<SourceFile> getSourcefiles() {
+        return this.sourcefiles;
+    }
+
+    public void addSourceFile(SourceFile sourceFile) {
+        sourcefiles.add(sourceFile);
+        sourceFile.setProject(this);
+    }
+
+    public void removeSourceFile(SourceFile sourceFile) {
+        sourcefiles.remove(sourceFile);
+        sourceFile.setProject(null);
+    }
+
+    public String toString() {
+        return "project id: " + this.id + ", name: " + this.name;
     }
 }

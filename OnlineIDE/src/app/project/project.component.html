@@ -1,0 +1,23 @@
+<h1>Project List</h1>
+
+<div>
+  <label>Create a new project:
+    <input #newProjectName />
+  </label>
+  <button (click)="createProject(newProjectName.value); newProjectName.value=''">
+    Create
+  </button>
+</div>
+
+<ul class="projects">
+  <li *ngFor="let project of projects">
+    <a>
+      <span class="row">{{ project.id}} | </span>
+      <span class="row">{{ project.name}}</span>
+    </a>
+    <button class="update" title="Update"(click)="updateProject(project)">Update</button>
+    <button class="delete" title="Delete"(click)="deleteProject(project)">Delete</button>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>
