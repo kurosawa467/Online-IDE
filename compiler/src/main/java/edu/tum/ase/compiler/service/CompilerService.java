@@ -48,6 +48,8 @@ public class CompilerService {
 
         sourceCode.setStdout(stdout);
         sourceCode.setStderr(stderr);
+
+        pro.waitFor();
         return 0 == pro.exitValue();
     }
 
