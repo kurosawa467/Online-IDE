@@ -1,0 +1,127 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="ngConsole.js">
+    angular.module("myApp", ['ngConsole']);
+  </script>
+</head>
+<body>
+
+<div class="row">
+  <div class="column full-height" style="float: left; width: 25%; background-color: #001529; height: 610px">
+    <div class="logo ant-column" style="text-align: center">
+      <img height="48px" src="assets/logo.png">
+    </div>
+    <div style="text-align: center">
+      <button class="ant-btn ant-btn-primary" routerLink="/projects" style="margin-right: 10px">
+        <i nz-icon="" class="anticon anticon-left ng-star-inserted" style="display: inline-block;">
+          <svg viewBox="64 64 896 896" fill="currentColor" width="1em" height="1em" data-icon="left" aria-hidden="true">
+            <path
+              d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path>
+          </svg>
+        </i><span>Back </span></button>
+      <button
+        class="ant-btn ant-btn-default ant-btn-circle ant-btn-icon-only" routerLink="/home">
+        <i class="anticon anticon-logout ng-star-inserted"
+           style="display: inline-block;">
+          <svg viewBox="64 64 896 896" fill="currentColor" width="1em" height="1em" data-icon="logout"
+               aria-hidden="true">
+            <path
+              d="M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"></path>
+          </svg>
+        </i><span style="display: none;"></span></button>
+    </div>
+    <div style="text-align: center; margin-top: 20px">
+      <h4 class="ide-file-list__title ant-typography"
+          style="margin: 0; margin-bottom: 10px; color: white">{{this.project.name}}</h4>
+    </div>
+    <div style="text-align: center; margin: 0">
+      <nz-table [nzData]="['']" [nzShowPagination]=false style="display: block;
+margin: auto">
+        <tbody>
+        <tr *ngFor="let file of this.sourcefiles"
+            style=" text-align: center; background-color: #001529">
+          <td style="background-color:#001529; vertical-align: center; color: white; width: 100%; height: 100%"
+              class="ant-btn ant-btn-default" oncontextmenu="return false;"
+              (click)="openFile(file)"
+              nz-popover
+              nzPopoverTitle="File: {{file.name}}"
+              nzPopoverTrigger="hover"
+              [nzPopoverContent]="contentTemplate">{{file.name}}
+            <ng-template #contentTemplate>
+              <p><a (click)="fileRename(file)">Rename
+              </a> |
+                <a (click)="fileDelete(file)">Delete</a>
+            </ng-template>
+            <nz-modal
+              [(nzVisible)]="isVisibleRename"
+              nzTitle="Rename File"
+              nzOkText="Rename"
+              nzCancelText="Cancel"
+              (nzOnOk)="handleOkRename()"
+              (nzOnCancel)="handleCancelRename()">
+              <ng-container *nzModalContent>
+                <label>
+                  <input [(ngModel)]="renamed" placeholder="{{renamedFile.name}}"/>
+                </label>
+              </ng-container>
+            </nz-modal>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <div style="text-align: center; margin-top: 10px">|
+      <button class="ant-btn ant-btn-default" (click)="showModal()">New File</button>
+      <nz-modal
+        [(nzVisible)]="isVisible"
+        nzTitle="New File"
+        nzOkText="Ok"
+        nzCancelText="Cancel"
+        (nzOnOk)="handleOk()"
+        (nzOnCancel)="handleCancel()">
+        <ng-container *nzModalContent>
+          <input [(ngModel)]="filename" placeholder={{this.filename}}/>
+        </ng-container>
+      </nz-modal>
+    </div>
+    <div style="text-align: center; margin-top: 10px">
+      <button class="ant-btn ant-btn-primary" (click)="showModalShare()">Share Project</button>
+      <nz-modal
+        [(nzVisible)]="isVisibleShare"
+        nzTitle="Share Project"
+        nzOkText="Ok"
+        nzCancelText="Cancel"
+        (nzOnOk)="handleOkShare()"
+        (nzOnCancel)="handleCancelShare()">
+        <ng-container *nzModalContent>
+          <input placeholder="Username"/>
+        </ng-container>
+      </nz-modal>
+    </div>
+
+  </div>
+  <div class="column" style="float: left; width: 75%">
+    <div style="float: left">
+      <div class="ide-action-bar__container ant-row" style="background-color: #001529; height: 50px;">
+        <button class="ant-btn ant-btn-default" (click)='saveFile()'><span>Save </span></button>
+        <button id="compile" [disabled]=" this.file === null || this.sourcecode !== this.file.sourcecode"
+                class="ant-btn ant-btn-default" style="margin-left: 5px"><span>Compile </span></button>
+      </div>
+      <div style="width: 800px">
+        <ngx-monaco-editor id="editor" *ngIf="this.file !== null"
+                           class="ng-valid ng-star-inserted ng-dirty ng-touched"
+                           style="width: 800px;"
+                           [options]="editorOptions" [(ngModel)]="sourcecode"></ngx-monaco-editor>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
+
