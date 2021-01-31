@@ -16,11 +16,12 @@ public class CompilerService {
 
         //Execute via javac or gcc
         boolean compilable;
-        if(extension.equals("java"))
+        if (extension.equals("java"))
             compilable =  run("javac " + sourceCode.getFileName(), sourceCode);
-        else
+        else if (extension.equals("c"))
             compilable =  run("gcc " + sourceCode.getFileName(), sourceCode);
-
+        else
+            compilable = false;
         sourceCode.setCompilable(compilable);
         return sourceCode;
     }
