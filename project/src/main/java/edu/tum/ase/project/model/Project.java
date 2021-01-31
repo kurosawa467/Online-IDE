@@ -32,6 +32,10 @@ public class Project implements Serializable {
     @JsonManagedReference
     private Set<SourceFile> sourcefiles;
 
+    @ElementCollection
+    @Column(name = "usernames")
+    private Set<String> usernames = new HashSet<>();
+
     protected Project() {
         // no-args constructor required by JPA spec
         // this one is protected since it shouldn't be used directly
@@ -77,6 +81,14 @@ public class Project implements Serializable {
     public void removeSourceFile(SourceFile sourceFile) {
         sourcefiles.remove(sourceFile);
         sourceFile.setProject(null);
+    }
+
+    public void addUsername(String username) {
+        usernames.add(username);
+    }
+
+    public boolean projectOwnership(String username) {
+        return usernames.contains(username);
     }
 
     public String toString() {

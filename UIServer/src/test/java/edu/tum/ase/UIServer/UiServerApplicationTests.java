@@ -1,4 +1,4 @@
-package edu.tum.ase.UIServer3;
+package edu.tum.ase.UIServer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

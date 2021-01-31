@@ -3,6 +3,7 @@ import {ProjectService} from './project.service';
 import {Project} from './project';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
 import {SourceFile} from '../editor/sourcefile';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-project',
@@ -14,6 +15,8 @@ export class ProjectComponent implements OnInit {
   projects: Project[];
   modifyingProject: Project;
   modifying: boolean;
+  currentUsername: string;
+  usernames: string[];
 
   constructor(private projectService: ProjectService) { }
 
@@ -27,16 +30,28 @@ export class ProjectComponent implements OnInit {
       .subscribe(projects => this.projects = projects);
   }
 
+  initiateProjectUsername(username: string) {
+    this.currentUsername = username;
+    this.usernames = this.usernames = new Array<string>();
+    this.usernames.push(username);
+  }
+
   // tslint:disable-next-line:typedef
   createProject() {
     this.modifying = false;
     const randomName: string = uniqueNamesGenerator({
       dictionaries: [adjectives, colors, animals]
     });
+
     // const newSourceFileSet = new Set<SourceFile>();
     const newSourceFileSet = new Array<SourceFile>();
+
+    this.projectService.getCurrentUsername().subscribe(currentUsername => this.initiateProjectUsername(currentUsername));
+    console.log('usernames length is ' + this.usernames.length);
+    console.log('current username is ' + this.currentUsername);
+
     // @ts-ignore
-    const newProject: Project = { name: randomName, sourcefiles: newSourceFileSet } as Project;
+    const newProject: Project = { name: randomName, sourcefiles: newSourceFileSet, usernames: this.usernames } as Project;
     console.log('newProject.name = ' + newProject.name);
     console.log('newProject.sourcefiles = ' + newProject.sourcefiles);
     this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));

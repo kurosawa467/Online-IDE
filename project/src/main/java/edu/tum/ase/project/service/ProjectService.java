@@ -43,4 +43,18 @@ public class ProjectService {
     public void deleteProject(Project project) {
         projectRepository.delete(project);
     }
+
+    public void addUser(String projectId, String username) {
+        if (projectRepository.findById(projectId).isPresent()) {
+            projectRepository.findById(projectId).get().addUsername(username);
+        }
+    }
+
+    public boolean checkProjectOwnership(String projectId, String username) {
+        boolean userOwnProject = false;
+        if (projectRepository.findById(projectId).isPresent()) {
+            userOwnProject = projectRepository.findById(projectId).get().projectOwnership(username);
+        }
+        return userOwnProject;
+    }
 }

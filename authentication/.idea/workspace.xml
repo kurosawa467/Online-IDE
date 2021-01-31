@@ -5,42 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5676de55-d1a1-4e7a-88ef-653d4574280d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../UI/.idea/UI.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/main/main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/main/main1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/test/test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_03/mavenstarter/src/test/test1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_03/servletapp/src/main/main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_03/servletapp/src/test/test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_04/restapiexample/restapiexample.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_04/servletapp/servletapp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_05/.idea/exercise_05.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_06/.idea/exercise_06.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_06/backend/monolith (1).iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_06/backend/monolith.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_06/frontend/monolith (2).iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_06/frontend/monolith.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_06/monolith/monolith.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_08/.idea/exercise_08.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_08/springtestpyramid/springtestpyramid.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise_08/teststarter/teststarter.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mavenstarter/.idea/mavenstarter.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mavenstarter/mavenstarter.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/main/main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/main/main1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/test/test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../mavenstarter/src/test/test1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../project-20201217T183711Z-001/project/project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../project-list-app/.idea/project-list-app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../project1/project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../servletapp/src/main/main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../servletapp/src/test/test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/ProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/ProjectApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../UIServer/src/main/java/edu/tum/ase/UIServer/Configuration/WebMvcConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/editor/editor.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/editor/editor.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/editor/editor.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/editor/editor.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/ngConsole.js" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/ngConsole.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/project/project.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/project/project.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/project/project.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/project/project.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UI/src/app/project/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UI/src/app/project/project.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/frontend/src/app/editor/editor.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/frontend/src/app/editor/editor.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/frontend/src/app/editor/editor.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/frontend/src/app/editor/editor.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/frontend/src/app/project/project.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/frontend/src/app/project/project.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/frontend/src/app/project/project.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/frontend/src/app/project/project.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/frontend/src/app/project/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/frontend/src/app/project/project.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/main/java/edu/tum/ase/UIServer3/Configuration/WebMvcConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/main/java/edu/tum/ase/UIServer3/Configuration/WebSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/src/main/java/edu/tum/ase/UIServer/Configuration/WebSecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/main/java/edu/tum/ase/UIServer3/UiServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/src/main/java/edu/tum/ase/UIServer/UiServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/main/resources/static/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/src/main/resources/static/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/main/resources/static/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/src/main/resources/static/main.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/main/resources/static/polyfills.js" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/src/main/resources/static/polyfills.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/main/resources/static/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/src/main/resources/static/styles.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIServer/src/test/java/edu/tum/ase/UIServer3/UiServerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UIServer/src/test/java/edu/tum/ase/UIServer/UiServerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/tum/ase/authentication/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/tum/ase/authentication/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/SourceFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/controller/SourceFileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/SourceFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/model/SourceFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/service/SourceFileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/service/SourceFileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../project/src/main/java/edu/tum/ase/project/service/ProjectService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +67,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/authentication" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.tum.ase.authentication.configuration" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.SpringOauth2Application">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
@@ -124,6 +124,9 @@
       <updated>1610892065674</updated>
       <workItem from="1610892066916" duration="3680000" />
       <workItem from="1610899021522" duration="1114000" />
+      <workItem from="1612047913357" duration="356000" />
+      <workItem from="1612048280360" duration="801000" />
+      <workItem from="1612107526316" duration="1051000" />
     </task>
     <servers />
   </component>

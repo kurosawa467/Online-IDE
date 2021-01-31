@@ -31,10 +31,12 @@ export class EditorComponent implements OnInit {
   file: SourceFile;
   filename: string;
 
+  // File Share Configurations
+  shareUsername: string;
+
   // Temporary Renaming
   renamed: string;
   renamedFile: SourceFile;
-
 
   constructor(private router: Router, private sourceFileService: SourceFileService) {
     console.log(this.router.getCurrentNavigation().extras.state.project);
@@ -87,6 +89,7 @@ export class EditorComponent implements OnInit {
 
   handleOkShare(): void {
     this.isVisibleShare = false;
+
   }
 
   handleCancelShare(): void {

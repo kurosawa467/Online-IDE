@@ -24,6 +24,11 @@ public class ProjectController {
         return newProject;
     }
 
+    @PostMapping("/addUserToProject/{id}/addUsername/{username}")
+    public void addUser(@RequestBody String id, @RequestBody String username) {
+        projectService.addUser(id, username);
+    }
+
     @GetMapping("/projects")
     public List<Project> getAllProjects() {
         return projectService.getProjects();
@@ -37,6 +42,11 @@ public class ProjectController {
     @GetMapping("/projects/{id}/sourcefiles")
     public Set<SourceFile> getProjectSourceFile(@PathVariable String id) {
         return projectService.findById(id).getSourcefiles();
+    }
+
+    @GetMapping("/checkOwnership/{id}/addUsername/{username}")
+    public boolean checkProjectOwnership(@RequestBody String id, @RequestBody String username) {
+        return projectService.checkProjectOwnership(id, username);
     }
 
     @PutMapping("/projects")

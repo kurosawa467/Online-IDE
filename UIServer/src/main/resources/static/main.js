@@ -40,7 +40,7 @@ GlobalErrorHandler.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\marku\Documents\TUM\onlineide\UIServer3\frontend\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\marku\Documents\TUM\onlineide\UIServer\frontend\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -126,6 +126,11 @@ class ProjectComponent {
         this.projectService.getProjects()
             .subscribe(projects => this.projects = projects);
     }
+    initiateProjectUsername(username) {
+        this.currentUsername = username;
+        this.usernames = this.usernames = new Array();
+        this.usernames.push(username);
+    }
     // tslint:disable-next-line:typedef
     createProject() {
         this.modifying = false;
@@ -134,8 +139,11 @@ class ProjectComponent {
         });
         // const newSourceFileSet = new Set<SourceFile>();
         const newSourceFileSet = new Array();
+        this.projectService.getCurrentUsername().subscribe(currentUsername => this.initiateProjectUsername(currentUsername));
+        console.log('usernames length is ' + this.usernames.length);
+        console.log('current username is ' + this.currentUsername);
         // @ts-ignore
-        const newProject = { name: randomName, sourcefiles: newSourceFileSet };
+        const newProject = { name: randomName, sourcefiles: newSourceFileSet, usernames: this.usernames };
         console.log('newProject.name = ' + newProject.name);
         console.log('newProject.sourcefiles = ' + newProject.sourcefiles);
         this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
@@ -690,6 +698,9 @@ class ProjectService {
     getProjects() {
         return this.http.get(this.projectURL).pipe();
     }
+    getCurrentUsername() {
+        return this.http.get('/getUsername').pipe();
+    }
     createProject(project) {
         return this.http.post(this.projectURL, project, httpOptions).pipe();
     }
@@ -928,14 +939,21 @@ function EditorComponent_ng_container_32_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r1.filename);
 } }
 function EditorComponent_ng_container_37_Template(rf, ctx) { if (rf & 1) {
+    const _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "input", 37);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input", 37);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function EditorComponent_ng_container_37_Template_input_ngModelChange_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r22.shareUsername = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
+} if (rf & 2) {
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r2.shareUsername);
 } }
 function EditorComponent_ngx_monaco_editor_48_Template(rf, ctx) { if (rf & 1) {
-    const _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "ngx-monaco-editor", 38);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function EditorComponent_ngx_monaco_editor_48_Template_ngx_monaco_editor_ngModelChange_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r22.sourcecode = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function EditorComponent_ngx_monaco_editor_48_Template_ngx_monaco_editor_ngModelChange_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r25); const ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r24.sourcecode = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
@@ -1090,7 +1108,7 @@ class EditorComponent {
     }
 }
 EditorComponent.ɵfac = function EditorComponent_Factory(t) { return new (t || EditorComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_editor_service__WEBPACK_IMPORTED_MODULE_2__["SourceFileService"])); };
-EditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EditorComponent, selectors: [["app-editor"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_editor_service__WEBPACK_IMPORTED_MODULE_2__["SourceFileService"]])], decls: 49, vars: 9, consts: [[1, "row"], [1, "column", "full-height", 2, "float", "left", "width", "25%", "background-color", "#001529", "height", "610px"], [1, "logo", "ant-column", 2, "text-align", "center"], ["height", "48px", "src", "assets/logo.png"], [2, "text-align", "center"], ["routerLink", "/projects", 1, "ant-btn", "ant-btn-primary", 2, "margin-right", "10px"], ["nz-icon", "", 1, "anticon", "anticon-left", "ng-star-inserted", 2, "display", "inline-block"], ["viewBox", "64 64 896 896", "fill", "currentColor", "width", "1em", "height", "1em", "data-icon", "left", "aria-hidden", "true"], ["d", "M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"], ["routerLink", "/home", 1, "ant-btn", "ant-btn-default", "ant-btn-circle", "ant-btn-icon-only"], [1, "anticon", "anticon-logout", "ng-star-inserted", 2, "display", "inline-block"], ["viewBox", "64 64 896 896", "fill", "currentColor", "width", "1em", "height", "1em", "data-icon", "logout", "aria-hidden", "true"], ["d", "M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"], [2, "display", "none"], [2, "text-align", "center", "margin-top", "20px"], [1, "ide-file-list__title", "ant-typography", 2, "margin", "0", "margin-bottom", "10px", "color", "white"], [2, "text-align", "center", "margin", "0"], [2, "display", "block", "margin", "auto", 3, "nzData", "nzShowPagination"], ["style", " text-align: center; background-color: #001529", 4, "ngFor", "ngForOf"], [2, "text-align", "center", "margin-top", "10px"], [1, "ant-btn", "ant-btn-default", 3, "click"], ["nzTitle", "New File", "nzOkText", "Ok", "nzCancelText", "Cancel", 3, "nzVisible", "nzVisibleChange", "nzOnOk", "nzOnCancel"], [4, "nzModalContent"], [1, "ant-btn", "ant-btn-primary", 3, "click"], ["nzTitle", "Share Project", "nzOkText", "Ok", "nzCancelText", "Cancel", 3, "nzVisible", "nzVisibleChange", "nzOnOk", "nzOnCancel"], [1, "column", 2, "float", "left", "width", "75%"], [2, "float", "left"], [1, "ide-action-bar__container", "ant-row", 2, "background-color", "#001529", "height", "50px"], ["id", "compile", 1, "ant-btn", "ant-btn-default", 2, "margin-left", "5px", 3, "disabled"], [2, "width", "800px"], ["id", "editor", "class", "ng-valid ng-star-inserted ng-dirty ng-touched", "style", "width: 800px;", 3, "options", "ngModel", "ngModelChange", 4, "ngIf"], [2, "text-align", "center", "background-color", "#001529"], ["oncontextmenu", "return false;", "nz-popover", "", "nzPopoverTrigger", "hover", 1, "ant-btn", "ant-btn-default", 2, "background-color", "#001529", "vertical-align", "center", "color", "white", "width", "100%", "height", "100%", 3, "nzPopoverTitle", "nzPopoverContent", "click"], ["contentTemplate", ""], ["nzTitle", "Rename File", "nzOkText", "Rename", "nzCancelText", "Cancel", 3, "nzVisible", "nzVisibleChange", "nzOnOk", "nzOnCancel"], [3, "click"], [3, "ngModel", "placeholder", "ngModelChange"], ["placeholder", "Username"], ["id", "editor", 1, "ng-valid", "ng-star-inserted", "ng-dirty", "ng-touched", 2, "width", "800px", 3, "options", "ngModel", "ngModelChange"]], template: function EditorComponent_Template(rf, ctx) { if (rf & 1) {
+EditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EditorComponent, selectors: [["app-editor"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_editor_service__WEBPACK_IMPORTED_MODULE_2__["SourceFileService"]])], decls: 49, vars: 9, consts: [[1, "row"], [1, "column", "full-height", 2, "float", "left", "width", "25%", "background-color", "#001529", "height", "610px"], [1, "logo", "ant-column", 2, "text-align", "center"], ["height", "48px", "src", "assets/logo.png"], [2, "text-align", "center"], ["routerLink", "/projects", 1, "ant-btn", "ant-btn-primary", 2, "margin-right", "10px"], ["nz-icon", "", 1, "anticon", "anticon-left", "ng-star-inserted", 2, "display", "inline-block"], ["viewBox", "64 64 896 896", "fill", "currentColor", "width", "1em", "height", "1em", "data-icon", "left", "aria-hidden", "true"], ["d", "M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"], ["routerLink", "/home", 1, "ant-btn", "ant-btn-default", "ant-btn-circle", "ant-btn-icon-only"], [1, "anticon", "anticon-logout", "ng-star-inserted", 2, "display", "inline-block"], ["viewBox", "64 64 896 896", "fill", "currentColor", "width", "1em", "height", "1em", "data-icon", "logout", "aria-hidden", "true"], ["d", "M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"], [2, "display", "none"], [2, "text-align", "center", "margin-top", "20px"], [1, "ide-file-list__title", "ant-typography", 2, "margin", "0", "margin-bottom", "10px", "color", "white"], [2, "text-align", "center", "margin", "0"], [2, "display", "block", "margin", "auto", 3, "nzData", "nzShowPagination"], ["style", " text-align: center; background-color: #001529", 4, "ngFor", "ngForOf"], [2, "text-align", "center", "margin-top", "10px"], [1, "ant-btn", "ant-btn-default", 3, "click"], ["nzTitle", "New File", "nzOkText", "Ok", "nzCancelText", "Cancel", 3, "nzVisible", "nzVisibleChange", "nzOnOk", "nzOnCancel"], [4, "nzModalContent"], [1, "ant-btn", "ant-btn-primary", 3, "click"], ["nzTitle", "Share Project", "nzOkText", "Ok", "nzCancelText", "Cancel", 3, "nzVisible", "nzVisibleChange", "nzOnOk", "nzOnCancel"], [1, "column", 2, "float", "left", "width", "75%"], [2, "float", "left"], [1, "ide-action-bar__container", "ant-row", 2, "background-color", "#001529", "height", "50px"], ["id", "compile", 1, "ant-btn", "ant-btn-default", 2, "margin-left", "5px", 3, "disabled"], [2, "width", "800px"], ["id", "editor", "class", "ng-valid ng-star-inserted ng-dirty ng-touched", "style", "width: 800px;", 3, "options", "ngModel", "ngModelChange", 4, "ngIf"], [2, "text-align", "center", "background-color", "#001529"], ["oncontextmenu", "return false;", "nz-popover", "", "nzPopoverTrigger", "hover", 1, "ant-btn", "ant-btn-default", 2, "background-color", "#001529", "vertical-align", "center", "color", "white", "width", "100%", "height", "100%", 3, "nzPopoverTitle", "nzPopoverContent", "click"], ["contentTemplate", ""], ["nzTitle", "Rename File", "nzOkText", "Rename", "nzCancelText", "Cancel", 3, "nzVisible", "nzVisibleChange", "nzOnOk", "nzOnCancel"], [3, "click"], [3, "ngModel", "placeholder", "ngModelChange"], ["]placeholder", "Username", 3, "ngModel", "ngModelChange"], ["id", "editor", 1, "ng-valid", "ng-star-inserted", "ng-dirty", "ng-touched", 2, "width", "800px", 3, "options", "ngModel", "ngModelChange"]], template: function EditorComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "html");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "head");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "title");
@@ -1155,7 +1173,7 @@ EditorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "nz-modal", 24);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("nzVisibleChange", function EditorComponent_Template_nz_modal_nzVisibleChange_36_listener($event) { return ctx.isVisibleShare = $event; })("nzOnOk", function EditorComponent_Template_nz_modal_nzOnOk_36_listener() { return ctx.handleOkShare(); })("nzOnCancel", function EditorComponent_Template_nz_modal_nzOnCancel_36_listener() { return ctx.handleCancelShare(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](37, EditorComponent_ng_container_37_Template, 2, 0, "ng-container", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](37, EditorComponent_ng_container_37_Template, 2, 1, "ng-container", 22);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();

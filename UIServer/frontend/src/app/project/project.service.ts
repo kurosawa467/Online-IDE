@@ -4,7 +4,6 @@ import { HttpHeaders } from '@angular/common/http';
 
 
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import {Project} from './project';
 
 const httpOptions = {
@@ -22,6 +21,10 @@ export class ProjectService {
   // tslint:disable-next-line:typedef
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.projectURL).pipe();
+  }
+
+  getCurrentUsername(): Observable<string> {
+    return this.http.get<string>('/getUsername').pipe();
   }
 
   createProject(project: Project): Observable<Project> {
