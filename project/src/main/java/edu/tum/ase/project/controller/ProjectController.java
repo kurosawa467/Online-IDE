@@ -21,6 +21,7 @@ public class ProjectController {
     public Project createProject(@RequestBody Project newProject) {
         projectService.createProject(newProject);
         System.out.println("newProject is being created: " + newProject);
+        System.out.println("newProject users: " + newProject.getUsernames().toString());
         return newProject;
     }
 

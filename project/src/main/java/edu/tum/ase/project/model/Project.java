@@ -91,6 +91,10 @@ public class Project implements Serializable {
         return usernames.contains(username);
     }
 
+    public Set<String> getUsernames() {
+        return this.usernames;
+    }
+
     public String toString() {
         return "project id: " + this.id + ", name: " + this.name;
     }

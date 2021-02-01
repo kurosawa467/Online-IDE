@@ -1,37 +1,39 @@
 {
-  "_from": "ng-console@^1.7.3",
+  "_args": [
+    [
+      "ng-console@1.7.3",
+      "C:\\Users\\marku\\Documents\\TUM\\onlineide1\\onlineide\\UI"
+    ]
+  ],
+  "_from": "ng-console@1.7.3",
   "_id": "ng-console@1.7.3",
   "_inBundle": false,
   "_integrity": "sha1-sEdro1VV7PCb49JATHVkRrh2QAo=",
   "_location": "/ng-console",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "ng-console@^1.7.3",
+    "raw": "ng-console@1.7.3",
     "name": "ng-console",
     "escapedName": "ng-console",
-    "rawSpec": "^1.7.3",
+    "rawSpec": "1.7.3",
     "saveSpec": null,
-    "fetchSpec": "^1.7.3"
+    "fetchSpec": "1.7.3"
   },
   "_requiredBy": [
-    "#USER",
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/ng-console/-/ng-console-1.7.3.tgz",
-  "_shasum": "b0476ba35555ecf09be3d2404c756446b876400a",
-  "_spec": "ng-console@^1.7.3",
-  "_where": "C:\\Users\\marku\\Documents\\TUM\\onlineide\\UIServer3\\frontend",
+  "_spec": "1.7.3",
+  "_where": "C:\\Users\\marku\\Documents\\TUM\\onlineide1\\onlineide\\UI",
   "author": {
     "name": "ImperdibleSoft"
   },
   "bugs": {
     "url": "https://github.com/ImperdibleSoft/ngConsole/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {},
-  "deprecated": false,
   "description": "Small directive for angular, to implement a console that's able to execute commands.",
   "devDependencies": {
     "del": "^2.2.0",

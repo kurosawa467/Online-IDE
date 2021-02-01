@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:9600}
+  port: ${PORT:9400}
 security:
   oauth2:
     client:
