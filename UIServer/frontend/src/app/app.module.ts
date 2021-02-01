@@ -9,6 +9,7 @@ import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NzTabsModule} from 'ng-zorro-antd/tabs';
 // import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -63,6 +64,7 @@ registerLocaleData(en);
     NzEmptyModule,
     NzModalModule,
     NzPopoverModule,
+    NzTabsModule,
     RouterModule.forRoot(routes),
     MonacoEditorModule.forRoot(),
   ],

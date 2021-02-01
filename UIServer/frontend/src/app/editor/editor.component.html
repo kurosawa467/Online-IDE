@@ -109,11 +109,18 @@ margin: auto">
         <button id="compile" [disabled]=" this.file === null || this.sourcecode !== this.file.sourcecode"
                 class="ant-btn ant-btn-default" style="margin-left: 5px"><span>Compile </span></button>
       </div>
-      <div style="width: 800px">
+      <div style="width: 800px; height: 300px">
         <ngx-monaco-editor id="editor" *ngIf="this.file !== null"
                            class="ng-valid ng-star-inserted ng-dirty ng-touched"
-                           style="width: 800px;"
-                           [options]="editorOptions" [(ngModel)]="sourcecode"></ngx-monaco-editor>
+                           style="width: 800px; height: 300px"
+                           [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+      </div>
+      <div style="margin-left: 10px">
+        <nz-tabset>
+          <nz-tab nzTitle="Output">
+            TODO: Add compiler output
+          </nz-tab>
+        </nz-tabset>
       </div>
     </div>
   </div>
