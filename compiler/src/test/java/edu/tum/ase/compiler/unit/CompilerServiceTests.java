@@ -11,7 +11,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
 
 
 @RunWith(SpringRunner.class)
@@ -27,13 +32,9 @@ public class CompilerServiceTests {
     @MockBean
     private Runtime run;
 
-
-    //TODO: runtime/process isn't mocked yet. These tests are rather integration tests. Try to mock the behaviour of runtime/process.
-
     //Java Code - without error
     @Test
     public void shouldPrintOutput_When_GoodInput() throws Exception {
-
         //given
         //sourcecode to test
         SourceCode goodsourceCode = new SourceCode();
@@ -43,9 +44,18 @@ public class CompilerServiceTests {
         goodsourceCode.setStdout("");
         goodsourceCode.setStderr("");
 
-        //expected output
+        //for mock IO: mock the process for the Execution of javac/gcc. Put your own Output/Error here
         String outputString = "";
+        InputStream mockout = new ByteArrayInputStream( outputString.getBytes());
+
         String errorString = "";
+        InputStream mockerr = new ByteArrayInputStream( errorString.getBytes());
+
+        //Mistake: given(run.getRuntime().exec(anyString())).willReturn(pro);
+        given(run.exec(anyString())).willReturn(pro);
+        given(pro.getInputStream()).willReturn(mockout);
+        given(pro.getErrorStream()).willReturn(mockerr);
+        given(pro.exitValue()).willReturn(0);
 
         //when
         SourceCode result = systemUnderTest.compile(goodsourceCode);
@@ -58,7 +68,6 @@ public class CompilerServiceTests {
     //Java Code - with error
     @Test
     public void shouldPrintError_When_BadInput() throws Exception {
-
         //given
         //sourcecode to test
         SourceCode badsourceCode = new SourceCode();
@@ -67,12 +76,19 @@ public class CompilerServiceTests {
         badsourceCode.setStdout("");
         badsourceCode.setStderr("");
 
-
-        // expected output
+        //for mock IO: mock the process for the Execution of javac/gcc. Put your own Output/Error here
         String outputString = "";
+        InputStream mockout = new ByteArrayInputStream( outputString.getBytes());
+
         String errorString = "App.java:1: error: ';' expected"+
-                             "public class App{public static void main(String[] args) {System.out.println(\"Hello World!\")}}"+
-                             "                                                                                           ^1 error";
+                "public class App{public static void main(String[] args) {System.out.println(\"Hello World!\")}}"+
+                "                                                                                           ^1 error";
+        InputStream mockerr = new ByteArrayInputStream( errorString.getBytes());
+
+        given(pro.getInputStream()).willReturn(mockout);
+        given(pro.getErrorStream()).willReturn(mockerr);
+        given(pro.exitValue()).willReturn(0);
+        given(run.exec(anyString())).willReturn(pro);
 
         //when
         SourceCode result = systemUnderTest.compile(badsourceCode);
@@ -80,13 +96,11 @@ public class CompilerServiceTests {
         //then
         assertEquals(result.getStdout(), outputString);
         assertEquals(result.getStderr(), errorString);
-
     }
 
     //C code - with error
     @Test
     public void shouldPrintError_When_BadInputC() throws Exception {
-
         //given
         //sourcecode to test
         SourceCode badsourceCode = new SourceCode();
@@ -99,9 +113,17 @@ public class CompilerServiceTests {
         badsourceCode.setStdout("");
         badsourceCode.setStderr("");
 
-        //expected output
+        //for mock IO: mock the process for the Execution of javac/gcc. Put your own Output/Error here
         String outputString = "";
+        InputStream mockout = new ByteArrayInputStream( outputString.getBytes());
+
         String errorString = "App.c: In function ‘main’:App.c:4:4: error: expected ‘;’ before ‘return’    return 0;    ^~~~~~";
+        InputStream mockerr = new ByteArrayInputStream( errorString.getBytes());
+
+        given(pro.getInputStream()).willReturn(mockout);
+        given(pro.getErrorStream()).willReturn(mockerr);
+        given(pro.exitValue()).willReturn(0);
+        given(run.exec(anyString())).willReturn(pro);
 
         //when
         SourceCode result = systemUnderTest.compile(badsourceCode);
@@ -124,42 +146,3 @@ public class CompilerServiceTests {
 }
 
 
-    // A failed attempt at mocking the Runtime/Process
-    /*@Test
-    public void shouldPrintOutput_When_GoodInput() throws Exception {
-
-        //given
-
-        //sourcecode to test
-        SourceCode goodsourceCode = new SourceCode();
-        goodsourceCode.setCode("public class App{public static void main(String[] args) {System.out.println(" + "\"" +
-                "Hello World!" + "\" );}}");
-        goodsourceCode.setFileName("App.java");
-        goodsourceCode.setStdout("");
-        goodsourceCode.setStderr("");
-
-----------------------------------------------
-I tried something like this to mock the Process/Runtime, but they just run normally:
-
-        //for mock IO: mock the process for the Execution of javac/gcc. Put your own Output/Error here
-        String outputString = "";
-        //InputStream mockout = new ByteArrayInputStream( outputString.getBytes());
-
-        String errorString = "";
-        //InputStream mockerr = new ByteArrayInputStream( errorString.getBytes());
-
-        //given(pro.getInputStream()).willReturn(mockout);
-        //given(pro.getErrorStream()).willReturn(mockerr);
-        //given(pro.exitValue()).willReturn(0);
-
-        //given(Runtime.getRuntime().exec(anyString())).willReturn(pro);
-
-----------------------------------------------
-
-        //when
-        SourceCode result = systemUnderTest.compile(goodsourceCode);
-
-        //then
-        assertEquals(result.getStdout(), outputString);
-        assertEquals(result.getStderr(), errorString);
-    }*/

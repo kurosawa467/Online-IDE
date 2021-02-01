@@ -40,7 +40,7 @@ public class CompilerIT {
         SourceCode result = systemUnderTest.compile(goodsourceCode);
 
         //then
-          //check if new File App.java is created
+        //check if new File App.java is created
         File f = new File("./App.java");
         assertTrue(f.exists());
         assertTrue(f.isFile());
@@ -53,7 +53,7 @@ public class CompilerIT {
     }
 
 
-    //Test Runtime Processes , same test as in unit test because the "unit test" is more like what we need here
+    //Test Runtime and Processes
     @Test
     public void shouldPrintError_When_BadInput() throws Exception {
 
