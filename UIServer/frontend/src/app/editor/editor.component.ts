@@ -63,7 +63,8 @@ export class EditorComponent implements OnInit {
     }
     */
     if (unique) {
-      const newSourceFile: SourceFile = { name: this.filename, sourcecode: '', language: 'c', project: this.project } as SourceFile;
+      let tmplanguage =  this.filename.split(".")
+      const newSourceFile: SourceFile = { name: this.filename, sourcecode: '', language: tmplanguage[tmplanguage.length - 1], project: this.project } as SourceFile;
       // this.sourcefiles.add(newSourceFile);
       console.log('Component: newSourceFile is being created: ' + newSourceFile);
       this.sourceFileService.createSourceFile(newSourceFile).subscribe(sourceFile => this.addSourceFile(sourceFile));
@@ -121,6 +122,8 @@ export class EditorComponent implements OnInit {
     }
     if (unique) {
       this.renamedFile.name = this.renamed;
+      let tmplanguage =  this.renamed.split(".")
+      this.renamedFile.language = tmplanguage[tmplanguage.length - 1]
       // tslint:disable-next-line:max-line-length
       this.sourceFileService.updateSourceFile(this.renamedFile).subscribe(updatedSourceFile => this.updateSourceFileName(updatedSourceFile));
       this.isVisibleRename = false;
