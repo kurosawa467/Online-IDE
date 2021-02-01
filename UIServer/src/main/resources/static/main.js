@@ -58,13 +58,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _project_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project.service */ "hBHG");
 /* harmony import */ var unique_names_generator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! unique-names-generator */ "tm45");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app.component */ "Sy1n");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-zorro-antd/table */ "rMZv");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var ng_zorro_antd_divider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng-zorro-antd/divider */ "5vDB");
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-zorro-antd/table */ "rMZv");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var ng_zorro_antd_divider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ng-zorro-antd/divider */ "5vDB");
 
 
 
@@ -117,17 +115,27 @@ function ProjectComponent_tr_23_Template(rf, ctx) { if (rf & 1) {
 } }
 const _c1 = function () { return [""]; };
 class ProjectComponent {
-    constructor(projectService, app) {
+    constructor(projectService) {
         this.projectService = projectService;
-        this.app = app;
     }
     ngOnInit() {
         this.getProjects();
+        this.getCurrentUsername();
     }
     // tslint:disable-next-line:typedef
     getProjects() {
         this.projectService.getProjects()
-            .subscribe(projects => this.projects = projects);
+            .subscribe(projects => {
+            this.projects = projects;
+            this.projectService.getUsername().subscribe((username) => {
+                this.currentUsername = new String(username.valueOf());
+            });
+        });
+    }
+    getCurrentUsername() {
+        this.projectService.getUsername().subscribe((username) => {
+            this.currentUsername = new String(username.valueOf());
+        });
     }
     // tslint:disable-next-line:typedef
     createProject() {
@@ -136,14 +144,15 @@ class ProjectComponent {
             dictionaries: [unique_names_generator__WEBPACK_IMPORTED_MODULE_2__["adjectives"], unique_names_generator__WEBPACK_IMPORTED_MODULE_2__["colors"], unique_names_generator__WEBPACK_IMPORTED_MODULE_2__["animals"]]
         });
         const newSourceFileSet = new Array();
-        const usernames = new Array();
-        const currentUsername = this.app.getUsername();
-        usernames.push(currentUsername);
+        const usernameSet = new Array();
+        usernameSet.push(this.currentUsername);
+        console.log("this.projects size is " + this.projects.length);
+        console.log("this.currentUsername is " + this.currentUsername);
         // @ts-ignore
         const newProject = {
             name: randomName,
             sourcefiles: newSourceFileSet,
-            usernames: usernames
+            usernames: usernameSet
         };
         this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
     }
@@ -167,7 +176,7 @@ class ProjectComponent {
         this.projectService.deleteProject(deleteProject.id).subscribe();
     }
 }
-ProjectComponent.ɵfac = function ProjectComponent_Factory(t) { return new (t || ProjectComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_project_service__WEBPACK_IMPORTED_MODULE_1__["ProjectService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"])); };
+ProjectComponent.ɵfac = function ProjectComponent_Factory(t) { return new (t || ProjectComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_project_service__WEBPACK_IMPORTED_MODULE_1__["ProjectService"])); };
 ProjectComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProjectComponent, selectors: [["app-project"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([_project_service__WEBPACK_IMPORTED_MODULE_1__["ProjectService"]])], decls: 24, vars: 3, consts: [[1, "center", 2, "width", "800px", "margin-left", "25%"], [1, "ant-btn", "ant-btn-default", "ant-btn-circle", "ant-btn-icon-only"], ["routerLink", "/home", 1, "anticon", "anticon-logout", "ng-star-inserted", 2, "display", "inline-block"], ["viewBox", "64 64 896 896", "fill", "currentColor", "width", "1em", "height", "1em", "data-icon", "logout", "aria-hidden", "true"], ["d", "M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 0 1-112.7 75.9A352.8 352.8 0 0 1 512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 0 1-112.7-75.9 353.28 353.28 0 0 1-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 0 0 0-12.6z"], [2, "display", "none"], [1, "projects__add-button", "ant-btn", "ant-btn-primary", 3, "click"], [2, "width", "800px", 3, "nzData"], [4, "ngFor", "ngForOf"], [3, "ngModel", "ngModelChange"], [3, "routerLink", "state"], ["nzType", "vertical"], [3, "click"]], template: function ProjectComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 1);
@@ -216,7 +225,7 @@ ProjectComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("nzData", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c1));
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](12);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.projects);
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterLink"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_5__["NzTableComponent"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_5__["NzTheadComponent"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_5__["NzTrDirective"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_5__["NzTableCellDirective"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_5__["NzThMeasureDirective"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_5__["NzTbodyComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterLinkWithHref"], ng_zorro_antd_divider__WEBPACK_IMPORTED_MODULE_8__["NzDividerComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwcm9qZWN0LmNvbXBvbmVudC5jc3MifQ== */"] });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_4__["NzTableComponent"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_4__["NzTheadComponent"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_4__["NzTrDirective"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_4__["NzTableCellDirective"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_4__["NzThMeasureDirective"], ng_zorro_antd_table__WEBPACK_IMPORTED_MODULE_4__["NzTbodyComponent"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["NgModel"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLinkWithHref"], ng_zorro_antd_divider__WEBPACK_IMPORTED_MODULE_7__["NzDividerComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwcm9qZWN0LmNvbXBvbmVudC5jc3MifQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ProjectComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -225,7 +234,7 @@ ProjectComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
                 providers: [_project_service__WEBPACK_IMPORTED_MODULE_1__["ProjectService"]],
                 styleUrls: ['./project.component.css']
             }]
-    }], function () { return [{ type: _project_service__WEBPACK_IMPORTED_MODULE_1__["ProjectService"] }, { type: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] }]; }, null); })();
+    }], function () { return [{ type: _project_service__WEBPACK_IMPORTED_MODULE_1__["ProjectService"] }]; }, null); })();
 
 
 /***/ }),
@@ -408,22 +417,6 @@ class AppComponent {
         this.authService = authService;
         this.http = http;
         this.title = 'UI';
-        this.currentUsername = '';
-    }
-    ngOnInit() {
-        this.initiateCurrentUsername();
-    }
-    getCurrentUsername() {
-        return this.http.get('/getUsername').pipe();
-    }
-    initiateCurrentUsername() {
-        this.getCurrentUsername().subscribe((currentUsername) => {
-            this.currentUsername = currentUsername.valueOf();
-            console.log("Getting current username " + this.currentUsername);
-        });
-    }
-    getUsername() {
-        return this.currentUsername;
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
@@ -715,6 +708,9 @@ class ProjectService {
     // tslint:disable-next-line:typedef
     getProjects() {
         return this.http.get(this.projectURL).pipe();
+    }
+    getUsername() {
+        return this.http.get('/getUsername').pipe();
     }
     createProject(project) {
         return this.http.post(this.projectURL, project, httpOptions).pipe();

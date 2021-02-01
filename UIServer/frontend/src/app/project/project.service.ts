@@ -23,6 +23,10 @@ export class ProjectService {
     return this.http.get<Project[]>(this.projectURL).pipe();
   }
 
+  getUsername(): Observable<String> {
+    return this.http.get<String>('/getUsername').pipe();
+  }
+
   createProject(project: Project): Observable<Project> {
     return this.http.post<Project>(this.projectURL, project, httpOptions).pipe();
   }

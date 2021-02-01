@@ -3,9 +3,6 @@ import {ProjectService} from './project.service';
 import {Project} from './project';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
 import {SourceFile} from '../editor/sourcefile';
-import {ReplaySubject} from "rxjs";
-import {map, mergeMap, switchMap} from "rxjs/operators";
-import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-project',
@@ -17,19 +14,31 @@ export class ProjectComponent implements OnInit {
   projects: Project[];
   modifyingProject: Project;
   modifying: boolean;
-  currentUsername: string;
+  currentUsername: String;
 
-  constructor(private projectService: ProjectService, private app: AppComponent) {
+  constructor(private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
     this.getProjects();
+    this.getCurrentUsername();
   }
 
   // tslint:disable-next-line:typedef
   getProjects() {
     this.projectService.getProjects()
-      .subscribe(projects => this.projects = projects);
+      .subscribe(projects => {
+        this.projects = projects;
+        this.projectService.getUsername().subscribe((username) => {
+          this.currentUsername = new String(username.valueOf());
+        })
+      });
+  }
+
+  getCurrentUsername() {
+    this.projectService.getUsername().subscribe((username) => {
+      this.currentUsername = new String(username.valueOf());
+    })
   }
 
   // tslint:disable-next-line:typedef
@@ -39,14 +48,17 @@ export class ProjectComponent implements OnInit {
       dictionaries: [adjectives, colors, animals]
     });
     const newSourceFileSet = new Array<SourceFile>();
-    const usernames = new Array<string>();
-    const currentUsername = this.app.getUsername();
-    usernames.push(currentUsername);
+    const usernameSet = new Array<String>();
+    usernameSet.push(this.currentUsername);
+
+    console.log("this.projects size is " + this.projects.length);
+    console.log("this.currentUsername is " + this.currentUsername);
+
     // @ts-ignore
     const newProject: Project = {
       name: randomName,
       sourcefiles: newSourceFileSet,
-      usernames: usernames
+      usernames: usernameSet
     } as Project;
     this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
   }

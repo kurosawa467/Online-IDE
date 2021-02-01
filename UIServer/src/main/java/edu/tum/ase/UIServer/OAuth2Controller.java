@@ -44,6 +44,7 @@ public class OAuth2Controller {
         JsonNode userJsonNode = restTemplate.getForObject(gitlabUserSearchUri, JsonNode.class);
         if (!userJsonNode.isNull()) {
             username = userJsonNode.get("name").asText();
+            return username;
         }
         System.out.println("username is " + username);
         return username;
