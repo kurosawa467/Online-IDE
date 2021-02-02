@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -31,8 +32,16 @@ public class ProjectController {
     }
 
     @GetMapping("/projects")
-    public List<Project> getAllProjects() {
-        return projectService.getProjects();
+    public List<Project> getAllProjects(@RequestParam String username) {
+        List<Project> allProjects = projectService.getProjects();
+        List<Project> returnedProjects = new ArrayList<Project>();
+        for (Project project : allProjects) {
+            Set<String> usernameSet = project.getUsernames();
+            if (usernameSet.contains(username)) {
+                returnedProjects.add(project);
+            }
+        }
+        return returnedProjects;
     }
 
     @GetMapping("/projects/{id}")
@@ -53,6 +62,8 @@ public class ProjectController {
     @PutMapping("/projects")
     public Project updateProject(@RequestBody Project updatedProject) {
         projectService.updateProject(updatedProject);
+        System.out.println("project " + updatedProject.getName() + " is being updated");
+        System.out.println("updated user set is " + updatedProject.getUsernames());
         return updatedProject;
     }
 

@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import {Project} from './project';
+import {AuthService} from "../auth.service";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,18 +17,15 @@ const httpOptions = {
 export class ProjectService {
   projectURL = 'http://localhost:8080/projects';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   // tslint:disable-next-line:typedef
-  getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.projectURL).pipe();
-  }
-
-  getUsername(): Observable<String> {
-    return this.http.get<String>('/getUsername').pipe();
+  getProjects(username: String): Observable<Project[]> {
+    return this.http.get<Project[]>(this.projectURL + "?username=" + username).pipe();
   }
 
   createProject(project: Project): Observable<Project> {
+
     return this.http.post<Project>(this.projectURL, project, httpOptions).pipe();
   }
 

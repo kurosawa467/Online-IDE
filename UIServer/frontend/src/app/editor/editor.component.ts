@@ -4,6 +4,8 @@ import {Project} from '../project/project';
 import {SourceFile} from './sourcefile';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
 import {SourceFileService} from './editor.service';
+import {ProjectService} from "../project/project.service";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-editor',
@@ -38,7 +40,7 @@ export class EditorComponent implements OnInit {
   renamed: string;
   renamedFile: SourceFile;
 
-  constructor(private router: Router, private sourceFileService: SourceFileService) {
+  constructor(private router: Router, private sourceFileService: SourceFileService, private authService: AuthService) {
     console.log(this.router.getCurrentNavigation().extras.state.project);
     this.project = router.getCurrentNavigation().extras.state.project;
     this.file = null;
@@ -86,11 +88,12 @@ export class EditorComponent implements OnInit {
 
   showModalShare(): void {
     this.isVisibleShare = true;
+    this.shareUsername = "";
   }
 
   handleOkShare(): void {
     this.isVisibleShare = false;
-
+    this.addProjectSharedUser(this.project, this.shareUsername);
   }
 
   handleCancelShare(): void {
@@ -192,6 +195,18 @@ export class EditorComponent implements OnInit {
         f.sourcecode = updatedSourceFile.sourcecode;
       }
     }
+  }
+
+  addProjectSharedUser(sharedProject: Project, sharedToUser: String) {
+    const updatedUserSet = new Set<String>(sharedProject.usernames);
+    updatedUserSet.add(sharedToUser);
+    sharedProject.usernames = Array.from(updatedUserSet) as unknown as Set<String>;
+    this.sourceFileService.updateProject(sharedProject).subscribe(updatedProject => {
+      /*
+      const index = this.projects.findIndex(project => project.id === this.modifyingProject.id);
+      this.projects[index] = updatedProject;
+       */
+    });
   }
 
   setRenamedSourceFileProject(sourceFile: SourceFile): void {

@@ -3,6 +3,7 @@ import {ProjectService} from './project.service';
 import {Project} from './project';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
 import {SourceFile} from '../editor/sourcefile';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-project',
@@ -11,34 +12,24 @@ import {SourceFile} from '../editor/sourcefile';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
+  currentUsername: String;
   projects: Project[];
   modifyingProject: Project;
   modifying: boolean;
-  currentUsername: String;
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.currentUsername = this.authService.getUsername();
     this.getProjects();
-    this.getCurrentUsername();
   }
 
   // tslint:disable-next-line:typedef
   getProjects() {
-    this.projectService.getProjects()
-      .subscribe(projects => {
-        this.projects = projects;
-        this.projectService.getUsername().subscribe((username) => {
-          this.currentUsername = new String(username.valueOf());
-        })
-      });
-  }
-
-  getCurrentUsername() {
-    this.projectService.getUsername().subscribe((username) => {
-      this.currentUsername = new String(username.valueOf());
-    })
+    this.projectService.getProjects(this.currentUsername).subscribe((projects) => {
+      this.projects = projects;
+    });
   }
 
   // tslint:disable-next-line:typedef
@@ -50,9 +41,6 @@ export class ProjectComponent implements OnInit {
     const newSourceFileSet = new Array<SourceFile>();
     const usernameSet = new Array<String>();
     usernameSet.push(this.currentUsername);
-
-    console.log("this.projects size is " + this.projects.length);
-    console.log("this.currentUsername is " + this.currentUsername);
 
     // @ts-ignore
     const newProject: Project = {
@@ -78,7 +66,6 @@ export class ProjectComponent implements OnInit {
       });
       this.modifying = false;
     }
-
   }
 
   deleteProject(deleteProject: Project): void {

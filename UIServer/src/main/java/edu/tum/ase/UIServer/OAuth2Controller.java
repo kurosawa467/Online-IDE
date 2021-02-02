@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 @CrossOrigin
@@ -26,14 +27,26 @@ public class OAuth2Controller {
     // curl --header "PRIVATE-TOKEN: <your_access_token>" "https://gitlab.example.com/api/v4/search?scope=users&search=doe"
 
     @GetMapping("/authenticated")
-    public boolean authenticated() {
+    public User authenticated() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
+        User currentUser = new User(false, new String(""));
         if (authentication != null) {
-            return authentication.getAuthorities().stream()
+            boolean isAuthenticated = authentication.getAuthorities().stream()
                     .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ANONYMOUS"));
+            currentUser.setAuthenticated(isAuthenticated);
+
+            // get username
+            String username = "";
+            String gitlabUserSearchUri = ymlConfig.getUserInfoUri();
+            System.out.println("gitlabUserSearchUri is " + gitlabUserSearchUri);
+            JsonNode userJsonNode = restTemplate.getForObject(gitlabUserSearchUri, JsonNode.class);
+            if (!userJsonNode.isNull()) {
+                username = userJsonNode.get("name").asText();
+            }
+            currentUser.setUsername(username);
         }
-        return false;
+        return currentUser;
     }
 
     @GetMapping("/getUsername")

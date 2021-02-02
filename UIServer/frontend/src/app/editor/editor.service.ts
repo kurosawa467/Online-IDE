@@ -39,6 +39,10 @@ export class SourceFileService {
     return this.http.put<SourceFile>(this.sourceFileURL, sourceFile, httpOptions).pipe();
   }
 
+  updateProject(project: Project): Observable<Project> {
+    return this.http.put<Project>(this.projectURL, project, httpOptions).pipe();
+  }
+
   deleteSourceFile(id: string): Observable<any> {
     const deleteSourceFileURL = this.sourceFileURL + '/' + id;
     return this.http.delete(deleteSourceFileURL, httpOptions).pipe();
