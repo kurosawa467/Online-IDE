@@ -65,12 +65,19 @@ public class OAuth2Controller {
 
     @GetMapping("/validUsername/{username}")
     public boolean getUsernameValidation(@PathVariable String username) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        boolean isAuthenticated = authentication.getAuthorities().stream()
+                .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ANONYMOUS"));
+
         boolean validUsername = false;
         String gitlabUserSearchUri = "https://gitlab.lrz.de/api/v4/users/" + username;
         JsonNode userJsonNode = restTemplate.getForObject(gitlabUserSearchUri, JsonNode.class);
         if (!userJsonNode.isNull()) {
             validUsername = userJsonNode.get("state").asText() == "active";
         }
+
         return validUsername;
+
     }
 }

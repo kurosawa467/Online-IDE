@@ -33,6 +33,13 @@ export class AuthService {
     });
   }
 
+  public checkValidUsername(username: string): boolean {
+    this.httpClient.get<boolean>('/validUsername/' + username).subscribe((validUsername) => {
+      return validUsername;
+    });
+    return false;
+  }
+
   public getUsername(): String {
     return this.username;
   }

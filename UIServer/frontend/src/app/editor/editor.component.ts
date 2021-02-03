@@ -94,6 +94,16 @@ export class EditorComponent implements OnInit {
   handleOkShare(): void {
     this.isVisibleShare = false;
     this.addProjectSharedUser(this.project, this.shareUsername);
+    /*
+    if(this.authService.checkValidUsername(this.shareUsername)) {
+      console.log("Provided share username " + this.shareUsername + " is valid");
+      this.addProjectSharedUser(this.project, this.shareUsername);
+    } else {
+      // inform user of the invalid input
+      console.log("Sharing to invalid username");
+    }
+
+     */
   }
 
   handleCancelShare(): void {
