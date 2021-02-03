@@ -22,22 +22,22 @@ public class ProjectController {
     public Project createProject(@RequestBody Project newProject) {
         projectService.createProject(newProject);
         System.out.println("newProject is being created: " + newProject);
-        System.out.println("newProject users: " + newProject.getUsernames().toString());
+        System.out.println("newProject users: " + newProject.getUserIds().toString());
         return newProject;
     }
 
-    @PostMapping("/addUserToProject/{id}/addUsername/{username}")
-    public void addUser(@RequestBody String id, @RequestBody String username) {
-        projectService.addUser(id, username);
+    @PostMapping("/addUserToProject/{id}/addUserId/{userId}")
+    public void addUser(@RequestBody String id, @RequestBody String userId) {
+        projectService.addUser(id, userId);
     }
 
     @GetMapping("/projects")
-    public List<Project> getAllProjects(@RequestParam String username) {
+    public List<Project> getAllProjects(@RequestParam String userId) {
         List<Project> allProjects = projectService.getProjects();
         List<Project> returnedProjects = new ArrayList<Project>();
         for (Project project : allProjects) {
-            Set<String> usernameSet = project.getUsernames();
-            if (usernameSet.contains(username)) {
+            Set<String> userIdSet = project.getUserIds();
+            if (userIdSet.contains(userId)) {
                 returnedProjects.add(project);
             }
         }
@@ -63,7 +63,7 @@ public class ProjectController {
     public Project updateProject(@RequestBody Project updatedProject) {
         projectService.updateProject(updatedProject);
         System.out.println("project " + updatedProject.getName() + " is being updated");
-        System.out.println("updated user set is " + updatedProject.getUsernames());
+        System.out.println("updated user set is " + updatedProject.getUserIds());
         return updatedProject;
     }
 

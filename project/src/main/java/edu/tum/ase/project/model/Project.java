@@ -33,8 +33,8 @@ public class Project implements Serializable {
     private Set<SourceFile> sourcefiles;
 
     @ElementCollection
-    @Column(name = "usernames")
-    private Set<String> usernames = new HashSet<>();
+    @Column(name = "userIds")
+    private Set<String> userIds = new HashSet<>();
 
     protected Project() {
         // no-args constructor required by JPA spec
@@ -83,16 +83,16 @@ public class Project implements Serializable {
         sourceFile.setProject(null);
     }
 
-    public void addUsername(String username) {
-        usernames.add(username);
+    public void addUsername(String userId) {
+        userIds.add(userId);
     }
 
-    public boolean projectOwnership(String username) {
-        return usernames.contains(username);
+    public boolean projectOwnership(String userId) {
+        return userIds.contains(userId);
     }
 
-    public Set<String> getUsernames() {
-        return this.usernames;
+    public Set<String> getUserIds() {
+        return this.userIds;
     }
 
     public String toString() {

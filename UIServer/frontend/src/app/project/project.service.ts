@@ -20,8 +20,8 @@ export class ProjectService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   // tslint:disable-next-line:typedef
-  getProjects(username: String): Observable<Project[]> {
-    return this.http.get<Project[]>(this.projectURL + "?username=" + username).pipe();
+  getProjects(userId: String): Observable<Project[]> {
+    return this.http.get<Project[]>(this.projectURL + "?userId=" + userId).pipe();
   }
 
   createProject(project: Project): Observable<Project> {

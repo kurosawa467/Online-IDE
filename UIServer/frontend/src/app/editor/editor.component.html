@@ -90,13 +90,31 @@ margin: auto">
       <button class="ant-btn ant-btn-primary" (click)="showModalShare()">Share Project</button>
       <nz-modal
         [(nzVisible)]="isVisibleShare"
-        nzTitle="Share Project"
+        nzTitle="Share Project (Please enter the 5-digit gitlab ID of the user)"
         nzOkText="Ok"
         nzCancelText="Cancel"
         (nzOnOk)="handleOkShare()"
         (nzOnCancel)="handleCancelShare()">
         <ng-container *nzModalContent>
-          <input [(ngModel)]="shareUsername" placeholder="Username"/>
+          <input [(ngModel)]="sharedUserId" placeholder="5-digit User ID"/>
+        </ng-container>
+      </nz-modal>
+      <nz-modal
+        [(nzVisible)]="isVisibleShareSuccess"
+        nzTitle="Share Project Success"
+        nzOkText="Ok"
+        (nzOnOk)="handleOkShareSuccess()">
+        <ng-container *nzModalContent>
+          <p>Project is successfully shared to {{sharedUsername}} (gitlab ID: {{sharedUserId}})</p>
+        </ng-container>
+      </nz-modal>
+      <nz-modal
+        [(nzVisible)]="isVisibleShareFail"
+        nzTitle="Share Project Fail"
+        nzOkText="Ok"
+        (nzOnOk)="handleOkShareFail()">
+        <ng-container *nzModalContent>
+          <p>{{sharedUserId}} is not a valid gitlab ID</p>
         </ng-container>
       </nz-modal>
     </div>

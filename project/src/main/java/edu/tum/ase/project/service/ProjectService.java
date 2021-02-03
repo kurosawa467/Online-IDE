@@ -44,16 +44,16 @@ public class ProjectService {
         projectRepository.delete(project);
     }
 
-    public void addUser(String projectId, String username) {
+    public void addUser(String projectId, String userId) {
         if (projectRepository.findById(projectId).isPresent()) {
-            projectRepository.findById(projectId).get().addUsername(username);
+            projectRepository.findById(projectId).get().addUsername(userId);
         }
     }
 
-    public boolean checkProjectOwnership(String projectId, String username) {
+    public boolean checkProjectOwnership(String projectId, String userId) {
         boolean userOwnProject = false;
         if (projectRepository.findById(projectId).isPresent()) {
-            userOwnProject = projectRepository.findById(projectId).get().projectOwnership(username);
+            userOwnProject = projectRepository.findById(projectId).get().projectOwnership(userId);
         }
         return userOwnProject;
     }

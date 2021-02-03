@@ -13,6 +13,7 @@ const LOGOUT_PATH = '/logout';
 export class AuthService {
 
   private authenticated$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  private userId: String;
   private username: String;
 
   public get authenticated(): ReplaySubject<boolean> {
@@ -26,22 +27,32 @@ export class AuthService {
   public checkAuthentication() {
     this.httpClient.get<User>('/authenticated').subscribe((currentUser) => {
       this.authenticated$.next(currentUser.authenticated);
+      this.userId = currentUser.userId;
       this.username = currentUser.username;
     }, (err) => {
       this.authenticated$.next(false);
+      this.userId = "";
       this.username = "";
     });
   }
 
-  public checkValidUsername(username: string): boolean {
-    this.httpClient.get<boolean>('/validUsername/' + username).subscribe((validUsername) => {
-      return validUsername;
+
+  public checkValidUserId(userId: string): Promise<String> {
+    return this.httpClient.get<String>('/validUserId/' + userId).toPromise()
+      .then(validUserId => {
+        return validUserId;
+      }).catch(error => {
+        console.log(error);
+        return error.error.text;
     });
-    return false;
   }
 
   public getUsername(): String {
     return this.username;
+  }
+
+  public getUserId(): String {
+    return this.userId;
   }
 
   public login(): void {

@@ -27,6 +27,8 @@ export class EditorComponent implements OnInit {
   isVisible: boolean;
   isVisibleShare: boolean;
   isVisibleRename: boolean;
+  isVisibleShareSuccess: boolean;
+  isVisibleShareFail: boolean;
 
   // File Configurations
   sourcefiles: Set<SourceFile>;
@@ -34,7 +36,8 @@ export class EditorComponent implements OnInit {
   filename: string;
 
   // File Share Configurations
-  shareUsername: string;
+  sharedUserId: string;
+  sharedUsername: string;
 
   // Temporary Renaming
   renamed: string;
@@ -88,22 +91,33 @@ export class EditorComponent implements OnInit {
 
   showModalShare(): void {
     this.isVisibleShare = true;
-    this.shareUsername = "";
+    this.sharedUserId = "";
+    this.sharedUsername = "";
   }
 
   handleOkShare(): void {
     this.isVisibleShare = false;
-    this.addProjectSharedUser(this.project, this.shareUsername);
-    /*
-    if(this.authService.checkValidUsername(this.shareUsername)) {
-      console.log("Provided share username " + this.shareUsername + " is valid");
-      this.addProjectSharedUser(this.project, this.shareUsername);
-    } else {
-      // inform user of the invalid input
-      console.log("Sharing to invalid username");
-    }
+    this.authService.checkValidUserId(this.sharedUserId).then(
+      validSharedUsername => {
+        if (!(validSharedUsername === "INVALID") && !(validSharedUsername === "")) {
+          this.addProjectSharedUser(this.project, this.sharedUserId);
+          this.sharedUsername = validSharedUsername.valueOf();
+          this.isVisibleShareSuccess = true;
+        } else {
+          this.isVisibleShareFail = true;
+        }
+      }
+    ).catch(error => {
+      console.log(error);
+    });
+  }
 
-     */
+  handleOkShareSuccess(): void {
+    this.isVisibleShareSuccess = false;
+  }
+
+  handleOkShareFail(): void {
+    this.isVisibleShareFail = false;
   }
 
   handleCancelShare(): void {
@@ -208,9 +222,9 @@ export class EditorComponent implements OnInit {
   }
 
   addProjectSharedUser(sharedProject: Project, sharedToUser: String) {
-    const updatedUserSet = new Set<String>(sharedProject.usernames);
+    const updatedUserSet = new Set<String>(sharedProject.userIds);
     updatedUserSet.add(sharedToUser);
-    sharedProject.usernames = Array.from(updatedUserSet) as unknown as Set<String>;
+    sharedProject.userIds = Array.from(updatedUserSet) as unknown as Set<String>;
     this.sourceFileService.updateProject(sharedProject).subscribe(updatedProject => {
       /*
       const index = this.projects.findIndex(project => project.id === this.modifyingProject.id);

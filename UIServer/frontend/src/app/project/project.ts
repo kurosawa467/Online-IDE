@@ -6,5 +6,5 @@ export interface Project {
   users: number;
   // sourceFileSet: Set<SourceFile>;
   sourcefiles: Set<SourceFile>;
-  usernames: Set<String>;
+  userIds: Set<String>;
 }

@@ -12,6 +12,7 @@ import {AuthService} from "../auth.service";
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
+  currentUserId: String;
   currentUsername: String;
   projects: Project[];
   modifyingProject: Project;
@@ -21,13 +22,14 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentUserId = this.authService.getUserId();
     this.currentUsername = this.authService.getUsername();
     this.getProjects();
   }
 
   // tslint:disable-next-line:typedef
   getProjects() {
-    this.projectService.getProjects(this.currentUsername).subscribe((projects) => {
+    this.projectService.getProjects(this.currentUserId).subscribe((projects) => {
       this.projects = projects;
     });
   }
@@ -39,14 +41,14 @@ export class ProjectComponent implements OnInit {
       dictionaries: [adjectives, colors, animals]
     });
     const newSourceFileSet = new Array<SourceFile>();
-    const usernameSet = new Array<String>();
-    usernameSet.push(this.currentUsername);
+    const userIdSet = new Array<String>();
+    userIdSet.push(this.currentUserId);
 
     // @ts-ignore
     const newProject: Project = {
       name: randomName,
       sourcefiles: newSourceFileSet,
-      usernames: usernameSet
+      userIds: userIdSet
     } as Project;
     this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
   }
