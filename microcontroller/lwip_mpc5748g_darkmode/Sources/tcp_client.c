@@ -52,7 +52,8 @@ static void enetif_init(void) {
 static err_t connection_callback(void *arg, struct tcp_pcb *tpcb, err_t err) {
 
 	// TODO: implement
-	const *message = "HEAD /dark-mode/toggle HTTP/1.0\r\n\r\n";
+	//const *message = "HEAD /dark-mode/toggle HTTP/1.0\r\n\r\n";
+	const *message = "GET /dark-mode/toggle HTTP/1.0\r\n\r\n";
 	u16_t message_len = 40;
 
 	err_t error = tcp_write(tpcb, message, message_len, TCP_WRITE_FLAG_COPY);
@@ -75,7 +76,7 @@ static void create_tcp_connection() {
 	ip_addr_t remote_ip;
 	ip_addr_t local_ip;
 
-	uint16_t remote_port = 5000;
+	uint16_t remote_port = 8080;
 	uint16_t local_port = 0; //will find any function available automatically
 
 	ipaddr_aton("192.168.178.28", &remote_ip);
@@ -85,15 +86,12 @@ static void create_tcp_connection() {
 	tcp_bind(pcb, &local_ip, local_port);
 
 	tcp_connect(pcb, &remote_ip, remote_port, connection_callback);
-
-
-
 }
 
 /**
  * Initialize networking and run main program loop.
  */
-void start_tcp_client() {
+void start_tcp_client(bool *pointer_button) {
 	/* init system architecture layer (initialization of timers) */
 	sys_init();
 
@@ -106,8 +104,12 @@ void start_tcp_client() {
     /* a counter to control the frequency of requests sent */
 	int counter = 0;
 
+	int sent_three = 0;
+
+
 	/* main loop for driver update and timers */
 	while (1) {
+
 		/* handle timers */
 		sys_check_timeouts();
 
@@ -116,11 +118,16 @@ void start_tcp_client() {
 
 		/* if there is an IP address set for netif, we create a TCP connection */
 		if (counter % 500000 == 0 && netif.ip_addr.addr) {
-			create_tcp_connection();
+
+			//only if button is pressed
+			if (*pointer_button){
+				create_tcp_connection();
+				*pointer_button = false;
+			}
 		}
 		counter++;
 	}
 
 	/* release the network interface */
 	enet_ethernetif_shutdown(&netif);
-}
+	}

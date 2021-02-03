@@ -21,9 +21,11 @@
 volatile int exit_code = 0;
 //TCP cant run together with interrupt
 volatile bool button_pressed = false;
+bool *pointer_button = &button_pressed;
 
 
-// Implement the Interrupt Service Routine
+//Copied this from the Interrupt Handler
+//TODO: Implement the Interrupt Service Routine
   void sw2_RE_isr(void){
 	  //Clear the Status Flag (15.2.3)
 	  //Status Flag 11 because the external interrupt is mapped to 11
@@ -63,13 +65,16 @@ int main(void)
   INT_SYS_InstallHandler(SIUL_EIRQ_08_15_IRQn, &sw2_RE_isr, NULL);
   INT_SYS_EnableIRQ(SIUL_EIRQ_08_15_IRQn);
 
+
+
   //check for button_pressed forever
   while (1) {
-	    /* handle timers */
+
+	  /* handle timers */
 	    sys_check_timeouts();
 
 	    if (button_pressed) {
-  			start_tcp_client();
+  			start_tcp_client(pointer_button);
   			button_pressed = false;
   		}
   	}
