@@ -485,7 +485,7 @@ const routes = [
     // {path: 'home', component: LoginComponent},
     { path: 'projects', component: _project_project_component__WEBPACK_IMPORTED_MODULE_13__["ProjectComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_26__["AuthGuard"]] },
     { path: 'ide/:id', component: _editor_editor_component__WEBPACK_IMPORTED_MODULE_20__["EditorComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_26__["AuthGuard"]] },
-    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_21__["LoginComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_26__["AuthGuard"]] },
+    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_21__["LoginComponent"] },
     // {path: 'projects', component: ProjectComponent},
     // {path: 'ide/:id', component: EditorComponent},
     { path: '**', redirectTo: 'login' }

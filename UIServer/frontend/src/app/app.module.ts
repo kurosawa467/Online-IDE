@@ -34,7 +34,7 @@ const routes: Route[] = [
   // {path: 'home', component: LoginComponent},
   {path: 'projects', component: ProjectComponent, canActivate: [AuthGuard]},
   {path: 'ide/:id', component: EditorComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
   // {path: 'projects', component: ProjectComponent},
   // {path: 'ide/:id', component: EditorComponent},
   {path: '**', redirectTo: 'login'}

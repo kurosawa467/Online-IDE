@@ -26,19 +26,19 @@ zuul.host.connect-timeout-millis: 20000
 zuul:
   ignored-services: "*"
   routes:
-    dark-mode-service:
+    dark-mode:
       path: "/dark-mode/**"
       service-id: dark-mode
       strip-prefix: false
-    project-service:
+    project:
       path: "/project/**"
       service-id: project
       strip-prefix: false
-    frontend-service:
+    ui:
       path: "/ui/**"
       service-id: ui
       strip-prefix: false
-    compiler-service:
+    compiler:
       path: "/compiler/**"
       service-id: compiler
       strip-prefix: false
