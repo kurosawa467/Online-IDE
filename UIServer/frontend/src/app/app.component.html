@@ -1,19 +1,4 @@
 <div class = container; style = "display: flex;
   justify-content: center">
   <router-outlet></router-outlet>
-  <div class = "center" style = "width: 800px; margin-left: 50%">
-    <body>
-    <div><h1>Welcome to the OnlineIDE</h1>
-    <h3>A project for Advanced Topics of Software Engineering (TUM)</h3>
-      <div *ngIf="!(authService.authenticated | async)">
-        <button (click)="authService.login()"><span>Login with Gitlab LRZ</span></button>
-      </div>
-      <div *ngIf="authService.authenticated | async">
-        <button routerLink="/projects"><span>Project Management</span></button>
-        |
-        <button (click)="authService.logout()">Sign out</button>
-      </div>
-    </div>
-    </body>
-  </div>
 </div>
