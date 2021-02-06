@@ -16,8 +16,8 @@ const httpOptions = {
 
 @Injectable()
 export class SourceFileService {
-  sourceFileURL = 'http://localhost:8080/sourceFiles';
-  projectURL = 'http://localhost:8080/projects';
+  sourceFileURL = '/project/sourceFiles';
+  projectURL = '/project/projects';
 
   constructor(private http: HttpClient) { }
 

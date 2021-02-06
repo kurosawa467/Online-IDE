@@ -15,7 +15,7 @@ const httpOptions = {
 
 @Injectable()
 export class ProjectService {
-  projectURL = 'http://localhost:8080/projects';
+  projectURL = '/project/projects';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

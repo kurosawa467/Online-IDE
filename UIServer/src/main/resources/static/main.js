@@ -328,8 +328,8 @@ const httpOptions = {
 class SourceFileService {
     constructor(http) {
         this.http = http;
-        this.sourceFileURL = 'http://localhost:8080/sourceFiles';
-        this.projectURL = 'http://localhost:8080/projects';
+        this.sourceFileURL = '/project/sourceFiles';
+        this.projectURL = '/project/projects';
     }
     // tslint:disable-next-line:typedef
     getSourceFiles() {
@@ -683,7 +683,7 @@ class ProjectService {
     constructor(http, authService) {
         this.http = http;
         this.authService = authService;
-        this.projectURL = 'http://localhost:8080/projects';
+        this.projectURL = '/project/projects';
     }
     // tslint:disable-next-line:typedef
     getProjects(userId) {
