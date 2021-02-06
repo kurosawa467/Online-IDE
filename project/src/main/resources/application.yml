@@ -9,3 +9,12 @@
 # spring.jpa.hibernate.ddl-auto=update
 # fixes Hibernate issue: https://github.com/spring-projects/spring-boot/issues/12007
 # spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring:
+  application:
+    name: project
+server:
+  port: ${PORT:9200}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}

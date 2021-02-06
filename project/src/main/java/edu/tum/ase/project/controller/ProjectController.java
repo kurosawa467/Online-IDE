@@ -14,6 +14,7 @@ import java.util.Set;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/project")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
