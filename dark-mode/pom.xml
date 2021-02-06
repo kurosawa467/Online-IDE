@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.tum.ase</groupId>
-	<artifactId>darkmode</artifactId>
+	<artifactId>dark-mode</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>darkmode</name>
+	<name>dark-mode</name>
 	<description>Dark Mode Project</description>
 
 	<properties>
@@ -23,6 +23,12 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
       <version>3.0.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>

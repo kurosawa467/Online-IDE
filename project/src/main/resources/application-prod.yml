@@ -1,5 +1,7 @@
 # Spring Datasource (DataSourceAutoConfiguration & DataSourceProperties)
 spring:
+    application:
+      name: discovery
   datasource:
     url: ${url:jdbc:postgresql://localhost:5432/my_db}
     username: admin
@@ -17,3 +19,7 @@ spring:
         # `ddl-auto` property is used to automatically create the tables based on the entity classes
     hibernate:
       ddl-auto: update
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

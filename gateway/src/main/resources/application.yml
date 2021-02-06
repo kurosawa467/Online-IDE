@@ -2,7 +2,7 @@ spring:
   application:
     name: gateway
 server:
-  port: ${PORT:8000}
+  port: ${PORT:8080}
 eureka:
   client:
     serviceUrl:
@@ -14,7 +14,19 @@ zuul.host.connect-timeout-millis: 20000
 zuul:
   ignored-services: "*"
   routes:
-    darkmode:
+    dark-mode-service:
       path: "/dark-mode/**"
-      service-id: darkmode
+      service-id: dark-mode
+      strip-prefix: false
+    project-service:
+      path: "/project/**"
+      service-id: project
+      strip-prefix: false
+    frontend-service:
+      path: "/ui/**"
+      service-id: ui
+      strip-prefix: false
+    compiler-service:
+      path: "/compiler/**"
+      service-id: compiler
       strip-prefix: false

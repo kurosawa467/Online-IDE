@@ -1,5 +1,10 @@
+spring:
+  application:
+    name: ui
 server:
   port: ${PORT:9400}
+  servlet:
+    context-path: /ui
 security:
   oauth2:
     client:
@@ -12,3 +17,7 @@ security:
         - api
     resource:
       userInfoUri: https://gitlab.lrz.de/api/v4/user
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
