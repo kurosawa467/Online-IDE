@@ -11,6 +11,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/project")
 public class SourceFileController {
     @Autowired
     private SourceFileService sourceFileService;

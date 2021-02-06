@@ -10,7 +10,7 @@ public class CompilerController {
     @Autowired
     private CompilerService compilerService;
 
-    @RequestMapping(path = "/compile", method = RequestMethod.POST)
+    @RequestMapping(path = "/compiler/compile", method = RequestMethod.POST)
     public SourceCode compile(@RequestBody SourceCode sourceCode) throws Exception {
         return compilerService.compile(sourceCode);
     }
