@@ -1,9 +1,8 @@
-
 spring:
-  profiles:
-    active: @spring.profiles.active@
   application:
     name: gateway
+  profiles:
+    active: @spring.profiles.active@
 server:
   port: ${PORT:8080}
 eureka:

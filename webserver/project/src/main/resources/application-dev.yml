@@ -1,9 +1,19 @@
+# Spring Datasource (DataSourceAutoConfiguration & DataSourceProperties)
 spring:
-  application:
-    name: project
-server:
-  port: ${PORT:9200}
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  datasource:
+    url: ${url:jdbc:postgresql://localhost:5432/my_db}
+    username: admin
+    password: test
+  jpa:
+    properties:
+      hibernate:
+        # Specifying the SQL dialect makes Hibernate generate better SQL for the chosen database
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        # Hibernate ddl auto (create, create-drop, validate, update)
+        jdbc:
+          lob:
+            # fixes Hibernate issue: https://github.com/spring-projects/spring-boot/issues/12007
+            non_contextual_creation: true
+        # `ddl-auto` property is used to automatically create the tables based on the entity classes
+    hibernate:
+      ddl-auto: update

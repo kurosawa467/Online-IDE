@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/AlexB/onlineide/UIServer/frontend/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/AlexB/onlineide/webserver/UIServer/frontend/src/polyfills.ts */"hN/g");
 
 
 /***/ }),

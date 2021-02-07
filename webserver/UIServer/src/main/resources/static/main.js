@@ -40,7 +40,7 @@ GlobalErrorHandler.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/AlexB/onlineide/UIServer/frontend/src/main.ts */"zUnb");
+module.exports = __webpack_require__(/*! /Users/AlexB/onlineide/webserver/UIServer/frontend/src/main.ts */"zUnb");
 
 
 /***/ }),
