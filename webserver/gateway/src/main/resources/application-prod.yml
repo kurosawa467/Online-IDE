@@ -1,0 +1,12 @@
+security:
+  oauth2:
+    client:
+      clientId: fdfb596ff6c1f388f163d71932b378b733c1d0da8872f2c4b930efd510ebe8a9
+      clientSecret: bfef883fa98c2c6053fce3a0a9bb40cbc81973c8e681c80b65457d8d0b00db49
+      accessTokenUri: https://gitlab.lrz.de/oauth/token
+      userAuthorizationUri: https://gitlab.lrz.de/oauth/authorize
+      scope:
+        - read_user
+        - api
+    resource:
+      userInfoUri: https://gitlab.lrz.de/api/v4/user
