@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {SourceFile} from './sourcefile';
 import {Project} from '../project/project';
+import {SourceCode} from "./sourcecode";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,6 +19,7 @@ const httpOptions = {
 export class SourceFileService {
   sourceFileURL = '/project/sourceFiles';
   projectURL = '/project/projects';
+  compilerURL = '/compiler/compile';
 
   constructor(private http: HttpClient) { }
 
@@ -51,5 +53,9 @@ export class SourceFileService {
   // tslint:disable-next-line:typedef
   getSourceFileProject(sourceFile: SourceFile): Observable<Project> {
     return this.http.get<Project>(this.sourceFileURL + '/' + sourceFile.id + '/project').pipe();
+  }
+
+  compileSourceFile(sourceFile: SourceFile): Observable<SourceCode> {
+    return this.http.post<SourceCode>(this.compilerURL, sourceFile, httpOptions).pipe();
   }
 }

@@ -1,7 +1,7 @@
 # Spring Datasource (DataSourceAutoConfiguration & DataSourceProperties)
 spring:
   datasource:
-    url: ${url:jdbc:postgresql://localhost:5432/my_db}
+    url: ${url:jdbc:postgresql://localhost:5439/my_db}
     username: admin
     password: test
   jpa:

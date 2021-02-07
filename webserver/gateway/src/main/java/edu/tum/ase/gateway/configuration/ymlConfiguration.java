@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "security.oauth2.resource")
 public class ymlConfiguration {
 
-  private String userInfoUri;
+  private String userInfoUri = "https://gitlab.lrz.de/api/v4/user";
 
   public String getUserInfoUri() {
     return this.userInfoUri;

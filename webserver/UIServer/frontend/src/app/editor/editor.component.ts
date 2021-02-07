@@ -6,6 +6,7 @@ import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'uniqu
 import {SourceFileService} from './editor.service';
 import {ProjectService} from "../project/project.service";
 import {AuthService} from "../auth.service";
+import {SourceCode} from "./sourcecode";
 
 @Component({
   selector: 'app-editor',
@@ -42,6 +43,9 @@ export class EditorComponent implements OnInit {
   // Temporary Renaming
   renamed: string;
   renamedFile: SourceFile;
+
+  // Compiling Result
+  sourceCode: SourceCode;
 
   constructor(private router: Router, private sourceFileService: SourceFileService, private authService: AuthService) {
     console.log(this.router.getCurrentNavigation().extras.state.project);
@@ -243,6 +247,10 @@ export class EditorComponent implements OnInit {
 
   deleteSourceFile(sourceFile: SourceFile): void {
     this.sourcefiles = new Set(Array.from(this.sourcefiles).filter(({name}) => name !== sourceFile.name));
+  }
+
+  compile(): void {
+    this.sourceFileService.compileSourceFile(this.file).subscribe(sourceCode => this.sourceCode = sourceCode);
   }
 }
 
