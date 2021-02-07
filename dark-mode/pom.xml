@@ -13,11 +13,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dark-mode</name>
 	<description>Dark Mode Project</description>
-
 	<properties>
-		<java.version>10</java.version>
+		<java.version>1.8</java.version>
 	</properties>
-
 	<dependencies>
     <dependency>
       <groupId>org.springframework.cloud</groupId>

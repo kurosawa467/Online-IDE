@@ -42,3 +42,4 @@ zuul:
       path: "/compiler/**"
       service-id: compiler
       strip-prefix: false
+
