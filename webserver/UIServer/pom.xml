@@ -85,6 +85,46 @@
             </configuration>
           </execution>
           <execution>
+            <id>npm install monaco editor</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install --save-dev "monaco-editor@0.17.0"</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install angular common</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install --save-dev "@angular/common@^9.0.0"</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install angular core</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install --save-dev "@angular/core@^9.0.0"</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install tslib</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install --save-dev "@tslib@^1.10.0"</arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>npm run-script</id>
             <phase>compile</phase>
             <goals>
