@@ -28,7 +28,7 @@
           <input [(ngModel)]="project.name"/>
         </label>
       </td>
-      <td>{{project.users}}</td>
+      <td>{{project.userIds.size}}</td>
       <td>
         <a routerLink='/ide/{{this.project.id}}' [state]="{project: this.project}">Open</a>
         <nz-divider nzType="vertical"></nz-divider>
