@@ -131,9 +131,9 @@ project:package:
 #publish jobs
 UIService:publish:
     stage: publish
-    image: docker:stable
+    image: docker:18-git
     services:
-        - name: docker:19.03.6-dind
+        - name: docker:18-dind
     script:
         - cd UIServer/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
