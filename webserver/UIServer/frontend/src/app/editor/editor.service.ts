@@ -55,7 +55,7 @@ export class SourceFileService {
     return this.http.get<Project>(this.sourceFileURL + '/' + sourceFile.id + '/project').pipe();
   }
 
-  compileSourceFile(sourceFile: SourceFile): Observable<SourceCode> {
-    return this.http.post<SourceCode>(this.compilerURL, sourceFile, httpOptions).pipe();
+  compileSourceFile(sourceCode: SourceCode): Observable<SourceCode> {
+    return this.http.post<SourceCode>(this.compilerURL, sourceCode, httpOptions).pipe();
   }
 }

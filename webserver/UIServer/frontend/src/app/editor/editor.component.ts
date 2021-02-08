@@ -52,6 +52,11 @@ export class EditorComponent implements OnInit {
     this.project = router.getCurrentNavigation().extras.state.project;
     this.file = null;
     this.sourcefiles = new Set<SourceFile>();
+    const sourceCodeToCompile: SourceCode = {
+      code: "",
+      fileName: ""
+    } as unknown as SourceCode;
+    this.sourceCode = sourceCodeToCompile;
     console.log('this.sourcefiles has been initiated.');
     console.log('this.sourcefiles size is ' + this.sourcefiles.size);
   }
@@ -250,8 +255,21 @@ export class EditorComponent implements OnInit {
     this.sourcefiles = new Set(Array.from(this.sourcefiles).filter(({name}) => name !== sourceFile.name));
   }
 
-  compile(): void {
-    this.sourceFileService.compileSourceFile(this.file).subscribe(sourceCode => this.sourceCode = sourceCode);
+  compile(sourceFile: SourceFile): void {
+    const sourceCodeToCompile: SourceCode = {
+      code: sourceFile.sourcecode,
+      fileName: sourceFile.name,
+    } as unknown as SourceCode;
+    this.sourceFileService.compileSourceFile(sourceCodeToCompile).subscribe(sourceCode => this.sourceCode = sourceCode);
+  }
+
+  // @ts-ignore
+  showCompilingResult(): string {
+    if (typeof this.sourceCode === 'undefined' || this.sourceCode === null) {
+      return "";
+    } else {
+      return "Compilable: " + this.sourceCode.compilable + ". Stdout: " + this.sourceCode.stdout + ". Stderr: " + this.sourceCode.stderr;
+    }
   }
 }
 

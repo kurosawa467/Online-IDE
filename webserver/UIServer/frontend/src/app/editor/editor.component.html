@@ -125,7 +125,7 @@ margin: auto">
       <div class="ide-action-bar__container ant-row" style="background-color: #001529; height: 50px;">
         <button class="ant-btn ant-btn-default" (click)='saveFile()'><span>Save </span></button>
         <button id="compile" [disabled]=" this.file === null || this.sourcecode !== this.file.sourcecode"
-                class="ant-btn ant-btn-default" style="margin-left: 5px" (click)="compile()"><span>Compile </span></button>
+                class="ant-btn ant-btn-default" style="margin-left: 5px" (click)="compile(this.file)"><span>Compile </span></button>
       </div>
       <div style="width: 800px; height: 300px">
         <ngx-monaco-editor id="editor" *ngIf="this.file !== null"
@@ -136,7 +136,7 @@ margin: auto">
       <div style="margin-left: 10px">
         <nz-tabset>
           <nz-tab nzTitle="Output">
-            {{sourceCode}}
+            "Compilable: " + {{this.sourceCode.compilable}} + ". Stdout: " + {{this.sourceCode.stdout}} + ". Stderr: " + {{this.sourceCode.stderr}}
           </nz-tab>
         </nz-tabset>
       </div>
