@@ -82,7 +82,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <arguments>install --only=prod</arguments>
+              <arguments>install</arguments>
             </configuration>
           </execution>
           <execution>
