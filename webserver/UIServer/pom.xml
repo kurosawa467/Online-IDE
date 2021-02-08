@@ -64,6 +64,7 @@
         <configuration>
           <workingDirectory>frontend</workingDirectory>
           <nodeVersion>v14.15.4</nodeVersion>
+          <npmVersion>v6</npmVersion>
         </configuration>
         <version>1.3</version>
         <executions>
@@ -81,16 +82,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <arguments>install</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>angular-cli install</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <configuration>
-              <arguments>install --no-optional -g angular-cli</arguments>
+              <arguments>install --no-optional</arguments>
             </configuration>
           </execution>
           <execution>
