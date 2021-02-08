@@ -1,10 +1,10 @@
 image: maven:3.3.9-jdk-8
 
 before_script:
-    - cd $CI_PROJECT_DIR/webserver
+    - cd $CI_PROJECT_DIR
 
 after_script:
-    - cd $CI_PROJECT_DIR/webserver
+    - cd $CI_PROJECT_DIR
 
 stages:
     - build
@@ -145,8 +145,8 @@ UIService:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/ui
     only:
-       # changes:
-       #     - UIServer/**/*
+        changes:
+            - UIServer/**/*
 compiler:publish:
     stage: publish
     image: docker:stable
@@ -163,8 +163,8 @@ compiler:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
-       # changes:
-       #     - UIServer/**/*
+        changes:
+            - UIServer/**/*
 dark-mode:publish:
     stage: publish
     image: docker:stable
@@ -199,8 +199,8 @@ gateway:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
     only:
-       # changes:
-       #     - gateway/**/*
+        changes:
+            - gateway/**/*
 discoveryserver:publish:
     stage: publish
     image: docker:stable
@@ -217,8 +217,8 @@ discoveryserver:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
-       # changes:
-       #     - discoveryserver/**/*
+        changes:
+            - discoveryserver/**/*
 project:publish:
     stage: publish
     image: docker:stable
@@ -235,6 +235,6 @@ project:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
-       # changes:
-       #     - project/**/*
+        changes:
+            - project/**/*
 
