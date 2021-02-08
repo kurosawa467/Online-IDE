@@ -25,8 +25,8 @@ compiler:build:
     stage: build
     script: cd compiler / && mvn clean compile
     only:
-      #  changes:
-      #      - compiler/**/*
+        changes:
+            - compiler/**/*
 
 dark-mode:build:
     stage: build
@@ -53,8 +53,8 @@ project:build:
     stage: build
     script: cd project / && mvn clean compile
     only:
-        changes:
-            - project/**/*
+     #   changes:
+        #    - project/**/*
 
 
 #test jobs
@@ -120,10 +120,10 @@ gateway:package:
             - webserver/gateway/**/*
 project:package:
     stage: package
-    script: cd webserver/project / && mvn package -DskipTests=true
+    script: cd project / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - project/target/*.jar
+            - webserver/project/target/*.jar
     only:
        # changes:
         #    - project/**/*       
