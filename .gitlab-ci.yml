@@ -1,9 +1,5 @@
 image: maven:3.3.9-jdk-8
 
-cache:
-    paths:
-        - .m2/repository
-
 before_script:
     - cd webserver
 
@@ -22,22 +18,22 @@ UIServer:build:
     stage: build
     script: cd UIServer / && mvn clean compile
     only:
-      #  changes:
-       #     - UIServer/**/*
+        changes:
+            - UIServer/**/*
 
 compiler:build:
     stage: build
     script: cd compiler / && mvn clean compile
     only:
-       # changes:
-       #     - compiler/**/*
+        changes:
+            - compiler/**/*
 
 dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-      #  changes:
-       #     - dark-mode/**/*
+        changes:
+            - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
@@ -50,15 +46,15 @@ gateway:build:
     stage: build
     script: cd gateway / && mvn clean compile -P prod
     only:
-       # changes:
-        #    - gateway/**/*
+        changes:
+            - gateway/**/*
 
 project:build:
     stage: build
     script: cd project / && mvn clean compile
     only:
-      #  changes:
-       #     - project/**/*
+        changes:
+            - project/**/*
 
 
 #test jobs
@@ -73,8 +69,8 @@ project:test:
         POSTGRES_PASSWORD: project_pw
         POSTGRES_USER: project_user
     only:
-     #   changes:
-     #       - project/**/*
+        changes:
+            - project/**/*
 
 #package jobs
 UIServer:package:
@@ -84,8 +80,8 @@ UIServer:package:
         paths:
             - UIServer/target/*.jar
     only:
-        changes:
-            - UIServer/**/*
+     #   changes:
+      #      - UIServer/**/*
 compiler:package:
     stage: package
     script: cd compiler / && mvn package -DskipTests=true
@@ -93,8 +89,8 @@ compiler:package:
         paths:
             - compiler/target/*.jar
     only:
-        changes:
-            - compiler/**/*
+     #   changes:
+      #      - compiler/**/*
 dark-mode:package:
     stage: package
     script: cd dark-mode / && mvn package -DskipTests=true
@@ -102,8 +98,8 @@ dark-mode:package:
         paths:
             - dark-mode/target/*.jar
     only:
-        changes:
-            - dark-mode/**/*
+      #  changes:
+       #     - dark-mode/**/*
 discoveryserver:package:
     stage: package
     script: cd discoveryserver / && mvn package -DskipTests=true
@@ -111,8 +107,8 @@ discoveryserver:package:
         paths:
             - discoveryserver/target/*.jar
     only:
-        changes:
-            - discoveryserver/**/*
+      #  changes:
+       #     - discoveryserver/**/*
 gateway:package:
     stage: package
     script: cd gateway / && mvn package -DskipTests=true 
@@ -120,8 +116,8 @@ gateway:package:
         paths:
             - gateway/target/*.jar
     only:
-        changes:
-            - gateway/**/*
+       # changes:
+      #      - gateway/**/*
 project:package:
     stage: package
     script: cd project / && mvn package -DskipTests=true
@@ -129,8 +125,8 @@ project:package:
         paths:
             - project/target/*.jar
     only:
-        changes:
-            - project/**/*       
+      #  changes:
+      #      - project/**/*       
 
 #publish jobs
 UIService:publish:
@@ -149,8 +145,8 @@ UIService:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/UIService
     only:
-        changes:
-            - UIServer/**/*
+       # changes:
+       #     - UIServer/**/*
 compiler:publish:
     stage: publish
     image: docker:stable
@@ -167,8 +163,8 @@ compiler:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
-        changes:
-            - compiler/**/*
+      #  changes:
+       #     - compiler/**/*
 discoveryserver:publish:
     stage: publish
     image: docker:stable
@@ -185,8 +181,8 @@ discoveryserver:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
-        changes:
-            - discoveryserver/**/*
+       # changes:
+       #     - discoveryserver/**/*
 project:publish:
     stage: publish
     image: docker:stable
@@ -203,8 +199,8 @@ project:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
-        changes:
-            - project/**/*
+       # changes:
+        #    - project/**/*
 dark-mode:publish:
     stage: publish
     image: docker:stable
@@ -221,24 +217,7 @@ dark-mode:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
     only:
-        changes:
-            - dark-mode/**/*
-gateway:publish:
-    stage: publish
-    image: docker:stable
-    services:
-        - docker:18-dind
-    script:
-        - cd gateway/
-        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-        - docker pull $IMAGE_NAME:latest || true
-        - docker build --tag $IMAGE_NAME:latest .
-        - docker push $IMAGE_NAME:latest
-    variables:
-        DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
-        IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
-    only:
-        changes:
-            - gateway/**/*
+       # changes:
+         #   - dark-mode/**/*
+
 
