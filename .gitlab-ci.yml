@@ -80,8 +80,8 @@ UIServer:package:
         paths:
             - UIServer/target/*.jar
     only:
-     #   changes:
-      #      - UIServer/**/*
+        changes:
+            - UIServer/**/*
 compiler:package:
     stage: package
     script: cd compiler / && mvn package -DskipTests=true
@@ -89,8 +89,8 @@ compiler:package:
         paths:
             - compiler/target/*.jar
     only:
-     #   changes:
-      #      - compiler/**/*
+        changes:
+            - compiler/**/*
 dark-mode:package:
     stage: package
     script: cd dark-mode / && mvn package -DskipTests=true
@@ -98,8 +98,8 @@ dark-mode:package:
         paths:
             - dark-mode/target/*.jar
     only:
-      #  changes:
-       #     - dark-mode/**/*
+        changes:
+            - dark-mode/**/*
 discoveryserver:package:
     stage: package
     script: cd discoveryserver / && mvn package -DskipTests=true
@@ -107,8 +107,8 @@ discoveryserver:package:
         paths:
             - discoveryserver/target/*.jar
     only:
-      #  changes:
-       #     - discoveryserver/**/*
+        changes:
+            - discoveryserver/**/*
 gateway:package:
     stage: package
     script: cd gateway / && mvn package -DskipTests=true 
@@ -116,8 +116,8 @@ gateway:package:
         paths:
             - gateway/target/*.jar
     only:
-       # changes:
-      #      - gateway/**/*
+        changes:
+            - gateway/**/*
 project:package:
     stage: package
     script: cd project / && mvn package -DskipTests=true
@@ -125,15 +125,17 @@ project:package:
         paths:
             - project/target/*.jar
     only:
-      #  changes:
-      #      - project/**/*       
+        changes:
+            - project/**/*       
 
 #publish jobs
 UIService:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:dind
+        - entrypoint: ["env", "-u", "DOCKER_HOST"]
+        - command: ["dockerd-entrypoint.sh"]
     script:
         - cd UIServer/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -143,6 +145,7 @@ UIService:publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
+        DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/UIService
     only:
        # changes:
@@ -151,7 +154,9 @@ compiler:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:dind
+        - entrypoint: ["env", "-u", "DOCKER_HOST"]
+        - command: ["dockerd-entrypoint.sh"]
     script:
         - cd compiler/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -161,6 +166,7 @@ compiler:publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
+        DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
       #  changes:
@@ -169,7 +175,9 @@ discoveryserver:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:dind
+        - entrypoint: ["env", "-u", "DOCKER_HOST"]
+        - command: ["dockerd-entrypoint.sh"]
     script:
         - cd discoveryserver/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -179,6 +187,7 @@ discoveryserver:publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
+        DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
        # changes:
@@ -187,7 +196,9 @@ project:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:dind
+        - entrypoint: ["env", "-u", "DOCKER_HOST"]
+        - command: ["dockerd-entrypoint.sh"]
     script:
         - cd project/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -197,6 +208,7 @@ project:publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
+        DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
        # changes:
@@ -205,7 +217,9 @@ dark-mode:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:dind
+        - entrypoint: ["env", "-u", "DOCKER_HOST"]
+        - command: ["dockerd-entrypoint.sh"]
     script:
         - cd dark-mode/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -215,6 +229,7 @@ dark-mode:publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
+        DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
     only:
        # changes:
