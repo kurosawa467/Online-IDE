@@ -22,43 +22,43 @@ UIServer:build:
     stage: build
     script: cd UIServer / && mvn clean compile
     only:
-        changes:
-            - UIServer/**/*
+      #  changes:
+       #     - UIServer/**/*
 
 compiler:build:
     stage: build
     script: cd compiler / && mvn clean compile
     only:
-        changes:
-            - compiler/**/*
+       # changes:
+       #     - compiler/**/*
 
 dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-        changes:
-            - dark-mode/**/*
+      #  changes:
+       #     - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
     script: cd discoveryserver / && mvn clean compile
     only:
-        changes:
-            - discoveryserver/**/*
+      #  changes:
+       #     - discoveryserver/**/*
 
 gateway:build:
     stage: build
     script: cd gateway / && mvn clean compile -P prod
     only:
-        changes:
-            - gateway/**/*
+       # changes:
+        #    - gateway/**/*
 
 project:build:
     stage: build
     script: cd project / && mvn clean compile
     only:
-        changes:
-            - project/**/*
+      #  changes:
+       #     - project/**/*
 
 
 #test jobs
@@ -73,8 +73,8 @@ project:test:
         POSTGRES_PASSWORD: project_pw
         POSTGRES_USER: project_user
     only:
-        changes:
-            - project/**/*
+     #   changes:
+     #       - project/**/*
 
 #package jobs
 UIServer:package:
