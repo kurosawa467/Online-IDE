@@ -59,7 +59,7 @@ services:
     ports:
       - 9200:9200
     environment:
-      - JDBC_URL=jdbc:postgresql://db:5432/project_db
+      - JDBC_URL=jdbc:postgresql://db:5432/project_db??user=project_user&password=project_pw
       - POSTGRES_DB=project_db
       - POSTGRES_PASSWORD=project_pw
       - POSTGRES_USER=project_user

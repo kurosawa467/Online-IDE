@@ -1,7 +1,7 @@
 package edu.tum.ase.gateway;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import edu.tum.ase.gateway.configuration.ymlConfiguration;
+import edu.tum.ase.gateway.configuration.YmlConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -20,7 +20,7 @@ public class OAuth2Controller {
   private OAuth2RestOperations restTemplate;
 
   @Autowired
-  private ymlConfiguration ymlConfig;
+  private YmlConfiguration ymlConfig;
 
   // curl --header "PRIVATE-TOKEN: <your_access_token>" "https://gitlab.example.com/api/v4/search?scope=users&search=doe"
 
