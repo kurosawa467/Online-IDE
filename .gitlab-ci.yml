@@ -4,7 +4,7 @@ before_script:
     - cd $CI_PROJECT_DIR/webserver
 
 after_script:
-    -  $CI_PROJECT_DIR/webserver
+    - cd $CI_PROJECT_DIR/webserver
 
 stages:
     - build
