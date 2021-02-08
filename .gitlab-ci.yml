@@ -19,14 +19,14 @@ UIServer:build:
     script: cd UIServer / && mvn clean compile
     only:
         changes:
-            - UIServer/**/*
+           - UIServer/**/*
 
 compiler:build:
     stage: build
     script: cd compiler / && mvn clean compile
     only:
-        changes:
-            - compiler/**/*
+      #  changes:
+      #      - compiler/**/*
 
 dark-mode:build:
     stage: build
@@ -40,7 +40,7 @@ discoveryserver:build:
     script: cd discoveryserver / && mvn clean compile
     only:
         changes:
-            - discoveryserver/**/*
+          - discoveryserver/**/*
 
 gateway:build:
     stage: build
@@ -80,8 +80,8 @@ UIServer:package:
         paths:
             - webserver/UIServer/target/*.jar
     only:
-        #changes:
-       #     - UIServer/**/*
+        changes:
+            - UIServer/**/*
 compiler:package:
     stage: package
     script: cd compiler / && mvn package -DskipTests=true
@@ -89,8 +89,8 @@ compiler:package:
         paths:
             - webserver/compiler/target/*.jar
     only:
-       # changes:
-        #    - compiler/**/*
+        changes:
+            - compiler/**/*
 dark-mode:package:
     stage: package
     script: cd dark-mode / && mvn package -DskipTests=true
@@ -98,8 +98,8 @@ dark-mode:package:
         paths:
             - webserver/dark-mode/target/*.jar
     only:
-       #  changes:
-       #     - dark-mode/**/*
+         changes:
+            - dark-mode/**/*
 discoveryserver:package:
     stage: package
     script: cd discoveryserver / && mvn package -DskipTests=true
@@ -107,8 +107,8 @@ discoveryserver:package:
         paths:
             - webserver/discoveryserver/target/*.jar
     only:
-       # changes:
-       #     - discoveryserver/**/*
+        changes:
+            - discoveryserver/**/*
 gateway:package:
     stage: package
     script: cd gateway / && mvn package -DskipTests=true 
@@ -116,8 +116,8 @@ gateway:package:
         paths:
             - webserver/gateway/target/*.jar
     only:
-     #   changes:
-       #     - webserver/gateway/**/*
+        changes:
+            - webserver/gateway/**/*
 project:package:
     stage: package
     script: cd webserver/project / && mvn package -DskipTests=true
