@@ -133,9 +133,7 @@ UIService:publish:
     stage: publish
     image: docker:stable
     services:
-        - name: docker:dind
-          entrypoint: ["env", "-u", "DOCKER_HOST"]
-          command: ["dockerd-entrypoint.sh"]
+        - name: docker:18-dind
     script:
         - cd UIServer/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -144,8 +142,6 @@ UIService:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2378
-        DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/UIService
     only:
        # changes:
