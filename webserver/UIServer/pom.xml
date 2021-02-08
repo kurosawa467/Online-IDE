@@ -84,30 +84,37 @@
               <arguments>install</arguments>
             </configuration>
           </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
           <execution>
-            <id>ng-build</id>
-            <phase>compile</phase>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>ng build</id>
             <goals>
               <goal>exec</goal>
             </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm run-script</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run-script build</arguments>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <executable>node</executable>
-          <workingDirectory>frontend</workingDirectory>
-          <arguments>
-            <argument>node_modules/@angular/cli/bin/ng</argument>
-            <argument>build</argument>
-            <argument>--base-href=/ui/</argument>
-          </arguments>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
