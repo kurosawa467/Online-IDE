@@ -32,8 +32,8 @@ dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-      #  changes:
-        #    - dark-mode/**/*
+        changes:
+            - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
@@ -93,13 +93,13 @@ compiler:package:
             - compiler/**/*
 dark-mode:package:
     stage: package
-    script: cd dark-mode / && mvn package -DskipTests=true
+    script: cd $CI_PROJECT_DIR/dark-mode / && mvn package -DskipTests=true
     artifacts:
         paths:
             - dark-mode/target/*.jar
     only:
-      #  changes:
-       #     - dark-mode/**/*
+         changes:
+            - dark-mode/**/*
 discoveryserver:package:
     stage: package
     script: cd discoveryserver / && mvn package -DskipTests=true
@@ -171,7 +171,7 @@ dark-mode:publish:
     services:
         - name: docker:18-dind
     script:
-        - cd dark-mode/
+        - cd webserver/dark-mode/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
         - docker pull $IMAGE_NAME:latest || true
         - docker build --tag $IMAGE_NAME:latest .
