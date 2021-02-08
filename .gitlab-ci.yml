@@ -1,23 +1,260 @@
 image: maven:3.3.9-jdk-8
 
 before_script:
-    - cd webserver/project
+    - cd webserver
+
+after_srcript:
+    - cd webserver
 
 stages:
     - build
     - test
     - package
+    - publish
+    - deploy
 
-build:
+#build jobs
+UIServer:build:
     stage: build
-    script: mvn clean compile
+    script: cd UIServer / && mvn clean compile
+    only:
+        changes:
+            - UIServer/**/*
 
-test:
+compiler:build:
+    stage: build
+    script: cd compiler / && mvn clean compile
+    only:
+        changes:
+            - compiler/**/*
+
+dark-mode:build:
+    stage: build
+    script: cd dark-mode / && mvn clean compile
+    only:
+        changes:
+            - dark-mode/**/*
+
+discoveryserver:build:
+    stage: build
+    script: cd discoveryserver / && mvn clean compile
+    only:
+        changes:
+            - discoveryserver/**/*
+
+gateway:build:
+    stage: build
+    script: cd gateway / && mvn clean compile
+    only:
+        changes:
+            - gateway/**/*
+
+project:build:
+    stage: build
+    script: cd project / && mvn clean compile
+    only:
+        changes:
+            - project/**/*
+
+#test jobs
+project:test:
     stage: test
-    script: mvn test
-
-package:
-    stage: package
-    script: mvn package
+    script: cd project / && mvn test
+    services:
+        - postgres:9.6
     variables:
-        MAVEN_OPTS: "-DskipTests=true"
+        JDBC_URL=jdbc:postgresql://postgres/project_db?user=admin&password=password
+        POSTGRES_DB=project_db
+        POSTGRES_PASSWORD=project_pw
+        POSTGRES_USER=project_user
+    only:
+        changes:
+            - project/**/*
+
+#package jobs
+UIServer:package:
+    stage: package
+    script: cd UIServer / && mvn package -DskipTests=true
+    artifacts:
+        paths:
+            - UIServer/target/*.jar
+    only:
+        changes:
+            - UIServer/**/*
+compiler:package:
+    stage: package
+    script: cd compiler / && mvn package -DskipTests=true
+    artifacts:
+        paths:
+            - compiler/target/*.jar
+    only:
+        changes:
+            - compiler/**/*
+dark-mode:package:
+    stage: package
+    script: cd dark-mode / && mvn package -DskipTests=true
+    artifacts:
+        paths:
+            - dark-mode/target/*.jar
+    only:
+        changes:
+            - dark-mode/**/*
+discoveryserver:package:
+    stage: package
+    script: cd discoveryserver / && mvn package -DskipTests=true
+    artifacts:
+        paths:
+            - discoveryserver/target/*.jar
+    only:
+        changes:
+            - discoveryserver/**/*
+gateway:package:
+    stage: package
+    script: cd gateway / && mvn package -DskipTests=true
+    artifacts:
+        paths:
+            - gateway/target/*.jar
+    only:
+        changes:
+            - gateway/**/*
+project:package:
+    stage: package
+    script: cd project / && mvn package -DskipTests=true
+    artifacts:
+        paths:
+            - project/target/*.jar
+    only:
+        changes:
+            - project/**/*       
+
+#publish jobs
+UIService:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - docker:18-dind
+    script:
+        - cd UIServer/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/UIService
+    only:
+        changes:
+            - UIServer/**/*
+compiler:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - docker:18-dind
+    script:
+        - cd compiler/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
+    only:
+        changes:
+            - compiler/**/*
+discoveryserver:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - docker:18-dind
+    script:
+        - cd discoveryserver/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
+    only:
+        changes:
+            - discoveryserver/**/*
+project:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - docker:18-dind
+    script:
+        - cd project/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/project
+    only:
+        changes:
+            - project/**/*
+dark-mode:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - docker:18-dind
+    script:
+        - cd dark-mode/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
+    only:
+        changes:
+            - dark-mode/**/*
+gateway:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - docker:18-dind
+    script:
+        - cd gateway/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
+    only:
+        changes:
+            - gateway/**/*
+
+#deploy job
+deploy:gcp:
+    stage: deploy
+    image: ubuntu:18.04
+    script:
+        - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y) '
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo "$SSH_PRIVATE_KEY | tr -d '\r' | ssh-add -
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        - scp -r docker-compose.prod.yml $SSH_HOST:~/
+        - ssh $SSH_HOST "sudo docker login" -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+        - ssh $SSH_HOST "sudo docker-compose -f docker-compose.prod.yml pull && sudo docker-compose -f docker-compose.prod.yml up --f"
+    variabels:
+        SSH_HOST: behl_alexander@34.107.8.134
+    only:
+        refs:
+            - master
+
+
