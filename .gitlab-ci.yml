@@ -1,9 +1,5 @@
 image: maven:3.3.9-jdk-8
 
-cache:
-    paths:
-        - .m2/repository
-
 before_script:
     - cd webserver
 
@@ -22,43 +18,43 @@ UIServer:build:
     stage: build
     script: cd UIServer / && mvn clean compile
     only:
-      #  changes:
-       #     - UIServer/**/*
+        changes:
+            - UIServer/**/*
 
 compiler:build:
     stage: build
     script: cd compiler / && mvn clean compile
     only:
-       # changes:
-       #     - compiler/**/*
+        changes:
+            - compiler/**/*
 
 dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-      #  changes:
-       #     - dark-mode/**/*
+        changes:
+            - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
     script: cd discoveryserver / && mvn clean compile
     only:
-      #  changes:
-       #     - discoveryserver/**/*
+        changes:
+            - discoveryserver/**/*
 
 gateway:build:
     stage: build
     script: cd gateway / && mvn clean compile -P prod
     only:
-       # changes:
-        #    - gateway/**/*
+        changes:
+            - gateway/**/*
 
 project:build:
     stage: build
     script: cd project / && mvn clean compile
     only:
-      #  changes:
-       #     - project/**/*
+        changes:
+            - project/**/*
 
 
 #test jobs
@@ -68,13 +64,13 @@ project:test:
     services:
         - postgres:9.6
     variables:
-        JDBC_URL: jdbc:postgresql://postgres/project_db?user=admin&password=password
+        JDBC_URL: jdbc:postgresql://postgres/project_db?user=project_user&password=project_pw
         POSTGRES_DB: project_db
         POSTGRES_PASSWORD: project_pw
         POSTGRES_USER: project_user
     only:
-     #   changes:
-     #       - project/**/*
+        changes:
+            - project/**/*
 
 #package jobs
 UIServer:package:
@@ -137,7 +133,7 @@ UIService:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:18-dind
     script:
         - cd UIServer/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -147,15 +143,15 @@ UIService:publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
-        IMAGE_NAME: $CI_REGISTRY_IMAGE/UIService
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/ui
     only:
-        changes:
-            - UIServer/**/*
+       # changes:
+       #     - UIServer/**/*
 compiler:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:18-dind
     script:
         - cd compiler/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -167,49 +163,13 @@ compiler:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
-        changes:
-            - compiler/**/*
-discoveryserver:publish:
-    stage: publish
-    image: docker:stable
-    services:
-        - docker:18-dind
-    script:
-        - cd discoveryserver/
-        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-        - docker pull $IMAGE_NAME:latest || true
-        - docker build --tag $IMAGE_NAME:latest .
-        - docker push $IMAGE_NAME:latest
-    variables:
-        DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
-        IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
-    only:
-        changes:
-            - discoveryserver/**/*
-project:publish:
-    stage: publish
-    image: docker:stable
-    services:
-        - docker:18-dind
-    script:
-        - cd project/
-        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-        - docker pull $IMAGE_NAME:latest || true
-        - docker build --tag $IMAGE_NAME:latest .
-        - docker push $IMAGE_NAME:latest
-    variables:
-        DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
-        IMAGE_NAME: $CI_REGISTRY_IMAGE/project
-    only:
-        changes:
-            - project/**/*
+       # changes:
+       #     - UIServer/**/*
 dark-mode:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:18-dind
     script:
         - cd dark-mode/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -221,13 +181,13 @@ dark-mode:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
     only:
-        changes:
-            - dark-mode/**/*
+       # changes:
+       #     - dark-mode/**/*
 gateway:publish:
     stage: publish
     image: docker:stable
     services:
-        - docker:18-dind
+        - name: docker:18-dind
     script:
         - cd gateway/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -239,6 +199,42 @@ gateway:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
     only:
-        changes:
-            - gateway/**/*
+       # changes:
+       #     - gateway/**/*
+discoveryserver:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - name: docker:18-dind
+    script:
+        - cd discoveryserver/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
+    only:
+       # changes:
+       #     - discoveryserver/**/*
+project:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - name: docker:18-dind
+    script:
+        - cd project/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/project
+    only:
+       # changes:
+       #     - project/**/*
 
