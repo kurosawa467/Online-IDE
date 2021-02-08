@@ -147,5 +147,94 @@ UIService:publish:
     only:
        # changes:
        #     - UIServer/**/*
-
+compiler:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - name: docker:18-dind
+    script:
+        - cd compiler/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
+    only:
+       # changes:
+       #     - UIServer/**/*
+dark-mode:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - name: docker:18-dind
+    script:
+        - cd dark-mode/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
+    only:
+       # changes:
+       #     - dark-mode/**/*
+gateway:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - name: docker:18-dind
+    script:
+        - cd gateway/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
+    only:
+       # changes:
+       #     - gateway/**/*
+discoveryserver:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - name: docker:18-dind
+    script:
+        - cd discoveryserver/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
+    only:
+       # changes:
+       #     - discoveryserver/**/*
+project:publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - name: docker:18-dind
+    script:
+        - cd project/
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker pull $IMAGE_NAME:latest || true
+        - docker build --tag $IMAGE_NAME:latest .
+        - docker push $IMAGE_NAME:latest
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/project
+    only:
+       # changes:
+       #     - project/**/*
 
