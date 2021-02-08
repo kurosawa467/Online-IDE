@@ -18,44 +18,43 @@ UIServer:build:
     stage: build
     script: cd UIServer / && mvn clean compile
     only:
-        changes:
-            - UIServer/**/*
+       # changes:
+        #   - UIServer/**/*
 
 compiler:build:
     stage: build
     script: cd compiler / && mvn clean compile
     only:
-        changes:
-            - compiler/**/*
+       # changes:
+         #   - compiler/**/*
 
 dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-        changes:
-            - dark-mode/**/*
+       # changes:
+        #    - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
     script: cd discoveryserver / && mvn clean compile
     only:
-        changes:
-            - discoveryserver/**/*
+      #  changes:
+       #   - discoveryserver/**/*
 
 gateway:build:
     stage: build
     script: cd gateway / && mvn clean compile -P prod
     only:
-        changes:
-            - gateway/**/*
+      #  changes:
+        #    - gateway/**/*
 
 project:build:
     stage: build
     script: cd project / && mvn clean compile
     only:
-        changes:
-            - project/**/*
-
+        #changes:
+        #    - project/**/*
 
 #test jobs
 project:test:
@@ -69,8 +68,8 @@ project:test:
         POSTGRES_PASSWORD: project_pw
         POSTGRES_USER: project_user
     only:
-        changes:
-            - project/**/*
+       # changes:
+        #    - project/**/*
 
 #package jobs
 UIServer:package:
@@ -78,55 +77,57 @@ UIServer:package:
     script: cd UIServer / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - UIServer/target/*.jar
+            - webserver/UIServer/target/*.jar
     only:
-        changes:
-            - UIServer/**/*
+      #  changes:
+       #     - UIServer/**/*
 compiler:package:
     stage: package
     script: cd compiler / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - compiler/target/*.jar
+            - webserver/compiler/target/*.jar
     only:
-        changes:
-            - compiler/**/*
+        #changes:
+        #    - compiler/**/*
+
 dark-mode:package:
     stage: package
     script: cd dark-mode / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - target/*.jar
+            - webserver/dark-mode/target/*.jar
     only:
-       #  changes:
-       #     - dark-mode/**/*
+        # changes:
+        #    - dark-mode/**/*
+
 discoveryserver:package:
     stage: package
     script: cd discoveryserver / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - discoveryserver/target/*.jar
+            - webserver/discoveryserver/target/*.jar
     only:
-        changes:
-            - discoveryserver/**/*
+       # changes:
+         #   - discoveryserver/**/*
 gateway:package:
     stage: package
     script: cd gateway / && mvn package -DskipTests=true 
     artifacts:
         paths:
-            - gateway/target/*.jar
+            - webserver/gateway/target/*.jar
     only:
-        changes:
-            - gateway/**/*
+       # changes:
+        #    - gateway/**/*
 project:package:
     stage: package
     script: cd project / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - project/target/*.jar
+            - webserver/project/target/*.jar
     only:
-        changes:
-            - project/**/*       
+        #changes:
+        #    - project/**/*       
 
 #publish jobs
 UIService:publish:
@@ -143,10 +144,10 @@ UIService:publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
-        IMAGE_NAME: $CI_REGISTRY_IMAGE/ui
+        IMAGE_NAME: $CI_REGISTRY_IMAGE/uiserver
     only:
-        changes:
-            - UIServer/**/*
+       # changes:
+        #    - UIServer/**/*
 compiler:publish:
     stage: publish
     image: docker:stable
@@ -163,8 +164,8 @@ compiler:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
-        changes:
-            - UIServer/**/*
+        #changes:
+         #   - UIServer/**/*
 dark-mode:publish:
     stage: publish
     image: docker:stable
@@ -182,7 +183,7 @@ dark-mode:publish:
         IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
     only:
        # changes:
-       #     - dark-mode/**/*
+          #  - dark-mode/**/*
 gateway:publish:
     stage: publish
     image: docker:stable
@@ -199,8 +200,8 @@ gateway:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
     only:
-        changes:
-            - gateway/**/*
+       # changes:
+        #    - gateway/**/*
 discoveryserver:publish:
     stage: publish
     image: docker:stable
@@ -217,8 +218,8 @@ discoveryserver:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
-        changes:
-            - discoveryserver/**/*
+       # changes:
+        #    - discoveryserver/**/*
 project:publish:
     stage: publish
     image: docker:stable
@@ -235,6 +236,24 @@ project:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
-        changes:
-            - project/**/*
-
+       # changes:
+         #   - project/**/*
+#deploy job
+deploy:gcp:
+    stage: deploy
+    image: ubuntu:18.04
+    script:
+        - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo "$SSH_PRIVATE_KEY | tr -d '\r' | ssh-add -
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        - scp -r docker-compose.prod.yml $SSH_HOST:~/
+        - ssh $SSH_HOST "sudo docker login" -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+        - ssh $SSH_HOST "sudo docker-compose -f docker-compose.prod.yml pull && sudo docker-compose -f docker-compose.prod.yml up --force-recreate-d"
+    variables:
+        SSH_HOST: behl_alexander@34.107.8.134
+    only:
+        refs:
+            - master
