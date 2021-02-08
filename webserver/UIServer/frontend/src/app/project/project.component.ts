@@ -48,7 +48,8 @@ export class ProjectComponent implements OnInit {
     const newProject: Project = {
       name: randomName,
       sourcefiles: newSourceFileSet,
-      userIds: userIdSet
+      userIds: userIdSet,
+      users: 1,
     } as Project;
     this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
   }

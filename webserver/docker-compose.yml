@@ -1,0 +1,83 @@
+version: '3.7'
+services:
+  discovery-service:
+    build:
+      dockerfile: Dockerfile
+      context: ./discoveryserver
+    image: discoveryserver:latest
+    restart: on-failure
+    ports:
+      - 8761:8761
+  gateway:
+    build:
+      dockerfile: Dockerfile
+      context: ./gateway
+    image: gateway:latest
+    restart: on-failure
+    depends_on:
+      - discovery-service
+    ports:
+      - 8080:8080
+    environment:
+      - EUREKA_SERVER=http://discovery-service:8761/eureka
+  dark-mode:
+    build:
+      dockerfile: Dockerfile
+      context: ./dark-mode
+    image: dark-mode:latest
+    restart: on-failure
+    depends_on:
+      - discovery-service
+    ports:
+      - 8000:8000
+    environment:
+      - EUREKA_SERVER=http://discovery-service:8761/eureka
+  ui:
+    build:
+      dockerfile: Dockerfile
+      context: ./UIServer
+    image: ui:latest
+    restart: on-failure
+    ports:
+      - 9400:9400
+    depends_on:
+      - discovery-service
+    environment:
+      - EUREKA_SERVER=http://discovery-service:8761/eureka
+  compiler:
+    build:
+      dockerfile: Dockerfile
+      context: ./compiler
+    image: compiler:latest
+    restart: on-failure
+    depends_on:
+      - discovery-service
+    ports:
+      - 7000:7000
+    environment:
+      - EUREKA_SERVER=http://discovery-service:8761/eureka
+  project:
+    build:
+      dockerfile: Dockerfile
+      context: ./project
+    image: project:latest
+    restart: on-failure
+    depends_on:
+      - db
+      - discovery-service
+    ports:
+      - 9200:9200
+    environment:
+      - JDBC_URL=jdbc:postgresql://db:5432/project_db
+      - POSTGRES_DB=project_db
+      - POSTGRES_PASSWORD=project_pw
+      - POSTGRES_USER=project_user
+      - EUREKA_SERVER=http://discovery-service:8761/eureka
+  db:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_DB=project_db
+      - POSTGRES_PASSWORD=project_pw
+      - POSTGRES_USER=project_user
+
+
