@@ -64,7 +64,6 @@
         <configuration>
           <workingDirectory>frontend</workingDirectory>
           <nodeVersion>v14.15.4</nodeVersion>
-          <npmVersion>6.0.0</npmVersion>
         </configuration>
         <version>1.3</version>
         <executions>
