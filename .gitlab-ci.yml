@@ -134,8 +134,8 @@ UIService:publish:
     image: docker:stable
     services:
         - name: docker:dind
-        - entrypoint: ["env", "-u", "DOCKER_HOST"]
-        - command: ["dockerd-entrypoint.sh"]
+          entrypoint: ["env", "-u", "DOCKER_HOST"]
+          command: ["dockerd-entrypoint.sh"]
     script:
         - cd UIServer/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -155,8 +155,8 @@ compiler:publish:
     image: docker:stable
     services:
         - name: docker:dind
-        - entrypoint: ["env", "-u", "DOCKER_HOST"]
-        - command: ["dockerd-entrypoint.sh"]
+          entrypoint: ["env", "-u", "DOCKER_HOST"]
+          command: ["dockerd-entrypoint.sh"]
     script:
         - cd compiler/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -176,8 +176,8 @@ discoveryserver:publish:
     image: docker:stable
     services:
         - name: docker:dind
-        - entrypoint: ["env", "-u", "DOCKER_HOST"]
-        - command: ["dockerd-entrypoint.sh"]
+          entrypoint: ["env", "-u", "DOCKER_HOST"]
+          command: ["dockerd-entrypoint.sh"]
     script:
         - cd discoveryserver/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -197,8 +197,8 @@ project:publish:
     image: docker:stable
     services:
         - name: docker:dind
-        - entrypoint: ["env", "-u", "DOCKER_HOST"]
-        - command: ["dockerd-entrypoint.sh"]
+          entrypoint: ["env", "-u", "DOCKER_HOST"]
+          command: ["dockerd-entrypoint.sh"]
     script:
         - cd project/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -218,8 +218,8 @@ dark-mode:publish:
     image: docker:stable
     services:
         - name: docker:dind
-        - entrypoint: ["env", "-u", "DOCKER_HOST"]
-        - command: ["dockerd-entrypoint.sh"]
+          entrypoint: ["env", "-u", "DOCKER_HOST"]
+          command: ["dockerd-entrypoint.sh"]
     script:
         - cd dark-mode/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
