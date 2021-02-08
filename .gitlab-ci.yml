@@ -133,7 +133,7 @@ UIService:publish:
     stage: publish
     image: docker:stable
     services:
-        - name: docker:19.03.0-dind
+        - name: docker:19.03.6-dind
     script:
         - cd UIServer/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -151,7 +151,7 @@ compiler:publish:
     stage: publish
     image: docker:stable
     services:
-        - name: docker:dind
+        - name: docker:19.03.6-dind
           entrypoint: ["env", "-u", "DOCKER_HOST"]
           command: ["dockerd-entrypoint.sh"]
     script:
@@ -162,7 +162,7 @@ compiler:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2378
+        DOCKER_HOST: tcp://docker:2375
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
@@ -172,7 +172,7 @@ discoveryserver:publish:
     stage: publish
     image: docker:stable
     services:
-        - name: docker:dind
+        - name: docker:19.03.6-dind
           entrypoint: ["env", "-u", "DOCKER_HOST"]
           command: ["dockerd-entrypoint.sh"]
     script:
@@ -183,7 +183,7 @@ discoveryserver:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2378
+        DOCKER_HOST: tcp://docker:2375
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
@@ -193,7 +193,7 @@ project:publish:
     stage: publish
     image: docker:stable
     services:
-        - name: docker:dind
+        - name: docker:19.03.6-dind
           entrypoint: ["env", "-u", "DOCKER_HOST"]
           command: ["dockerd-entrypoint.sh"]
     script:
@@ -204,7 +204,7 @@ project:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2378
+        DOCKER_HOST: tcp://docker:2375
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
