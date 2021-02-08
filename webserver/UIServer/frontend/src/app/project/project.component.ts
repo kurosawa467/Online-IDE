@@ -49,7 +49,6 @@ export class ProjectComponent implements OnInit {
       name: randomName,
       sourcefiles: newSourceFileSet,
       userIds: userIdSet,
-      users: 1,
     } as Project;
     this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
   }

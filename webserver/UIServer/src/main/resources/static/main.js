@@ -146,7 +146,6 @@ class ProjectComponent {
             name: randomName,
             sourcefiles: newSourceFileSet,
             userIds: userIdSet,
-            users: 1,
         };
         this.projectService.createProject(newProject).subscribe(project => this.projects.push(project));
     }
