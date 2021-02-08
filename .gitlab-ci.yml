@@ -242,7 +242,7 @@ deploy:gcp:
     stage: deploy
     image: ubuntu:18.04
     script:
-        - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y) '
+        - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
         - eval $(ssh-agent -s)
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
@@ -250,7 +250,7 @@ deploy:gcp:
         - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
         - scp -r docker-compose.prod.yml $SSH_HOST:~/
         - ssh $SSH_HOST "sudo docker login" -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-        - ssh $SSH_HOST "sudo docker-compose -f docker-compose.prod.yml pull && sudo docker-compose -f docker-compose.prod.yml up --f"
+        - ssh $SSH_HOST "sudo docker-compose -f docker-compose.prod.yml pull && sudo docker-compose -f docker-compose.prod.yml up --force-recreate-d"
     variabels:
         SSH_HOST: behl_alexander@34.107.8.134
     only:
