@@ -1,5 +1,9 @@
 image: maven:3.3.9-jdk-8
 
+cache:
+    paths:
+        - .m2/repository
+
 before_script:
     - cd webserver
 
@@ -44,7 +48,7 @@ discoveryserver:build:
 
 gateway:build:
     stage: build
-    script: cd gateway / && mvn clean compile
+    script: cd gateway / && mvn clean compile -P prod
     only:
         changes:
             - gateway/**/*
@@ -110,7 +114,7 @@ discoveryserver:package:
             - discoveryserver/**/*
 gateway:package:
     stage: package
-    script: cd gateway / && mvn package -DskipTests=true
+    script: cd gateway / && mvn package -DskipTests=true 
     artifacts:
         paths:
             - gateway/target/*.jar
