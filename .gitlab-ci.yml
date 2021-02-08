@@ -32,8 +32,8 @@ dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-        changes:
-            - dark-mode/**/*
+       # changes:
+        #    - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
@@ -46,8 +46,8 @@ gateway:build:
     stage: build
     script: cd gateway / && mvn clean compile -P prod
     only:
-        changes:
-            - gateway/**/*
+        #changes:
+        #    - gateway/**/*
 
 project:build:
     stage: build
@@ -78,19 +78,19 @@ UIServer:package:
     script: cd UIServer / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - UIServer/target/*.jar
+            - webserver/UIServer/target/*.jar
     only:
-        changes:
-            - UIServer/**/*
+        #changes:
+       #     - UIServer/**/*
 compiler:package:
     stage: package
     script: cd compiler / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - compiler/target/*.jar
+            - webserver/compiler/target/*.jar
     only:
-        changes:
-            - compiler/**/*
+       # changes:
+        #    - compiler/**/*
 dark-mode:package:
     stage: package
     script: cd dark-mode / && mvn package -DskipTests=true
@@ -105,28 +105,28 @@ discoveryserver:package:
     script: cd discoveryserver / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - discoveryserver/target/*.jar
+            - webserver/discoveryserver/target/*.jar
     only:
-        changes:
-            - discoveryserver/**/*
+       # changes:
+       #     - discoveryserver/**/*
 gateway:package:
     stage: package
-    script: cd gateway / && mvn package -DskipTests=true 
+    script: cd webserver/gateway / && mvn package -DskipTests=true 
     artifacts:
-        paths:
-            - gateway/target/*.jar
+      #  paths:
+         #   - gateway/target/*.jar
     only:
         changes:
             - gateway/**/*
 project:package:
     stage: package
-    script: cd project / && mvn package -DskipTests=true
+    script: cd webserver/project / && mvn package -DskipTests=true
     artifacts:
         paths:
             - project/target/*.jar
     only:
-        changes:
-            - project/**/*       
+       # changes:
+        #    - project/**/*       
 
 #publish jobs
 UIService:publish:
@@ -145,8 +145,8 @@ UIService:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/ui
     only:
-        changes:
-            - UIServer/**/*
+       # changes:
+        #    - UIServer/**/*
 compiler:publish:
     stage: publish
     image: docker:stable
@@ -163,8 +163,8 @@ compiler:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
-        changes:
-            - UIServer/**/*
+       # changes:
+      #      - UIServer/**/*
 dark-mode:publish:
     stage: publish
     image: docker:stable
@@ -199,8 +199,8 @@ gateway:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
     only:
-        changes:
-            - gateway/**/*
+       # changes:
+       #     - gateway/**/*
 discoveryserver:publish:
     stage: publish
     image: docker:stable
@@ -217,8 +217,8 @@ discoveryserver:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
-        changes:
-            - discoveryserver/**/*
+      #  changes:
+       #     - discoveryserver/**/*
 project:publish:
     stage: publish
     image: docker:stable
@@ -235,6 +235,6 @@ project:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
-        changes:
-            - project/**/*
+       # changes:
+        #    - project/**/*
 
