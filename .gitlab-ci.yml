@@ -171,7 +171,7 @@ dark-mode:publish:
     services:
         - name: docker:18-dind
     script:
-        - cd webserver/dark-mode/
+        - cd dark-mode/
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
         - docker pull $IMAGE_NAME:latest || true
         - docker build --tag $IMAGE_NAME:latest .
