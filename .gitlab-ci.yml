@@ -39,8 +39,8 @@ discoveryserver:build:
     stage: build
     script: cd discoveryserver / && mvn clean compile
     only:
-      #  changes:
-       #     - discoveryserver/**/*
+        changes:
+            - discoveryserver/**/*
 
 gateway:build:
     stage: build
@@ -64,7 +64,7 @@ project:test:
     services:
         - postgres:9.6
     variables:
-        JDBC_URL: jdbc:postgresql://postgres/project_db?user=admin&password=password
+        JDBC_URL: jdbc:postgresql://postgres/project_db?user=project_user&password=project_pw
         POSTGRES_DB: project_db
         POSTGRES_PASSWORD: project_pw
         POSTGRES_USER: project_user
