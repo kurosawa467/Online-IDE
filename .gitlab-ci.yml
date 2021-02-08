@@ -32,8 +32,8 @@ dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-       # changes:
-        #    - dark-mode/**/*
+        changes:
+            - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
@@ -46,8 +46,8 @@ gateway:build:
     stage: build
     script: cd gateway / && mvn clean compile -P prod
     only:
-        #changes:
-        #    - gateway/**/*
+        changes:
+            - gateway/**/*
 
 project:build:
     stage: build
