@@ -5,8 +5,6 @@ import edu.tum.ase.project.model.SourceFile;
 import edu.tum.ase.project.service.ProjectService;
 import org.hibernate.boot.MappingNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +32,6 @@ public class ProjectController {
         projectService.addUser(id, userId);
     }
 
-    @PostFilter("filterObject.hasUserAccess(authentication.principal.username) || hasRole('ADMIN')")
     @GetMapping("/projects")
     public List<Project> getAllProjects(@RequestParam String userId) {
         List<Project> allProjects = projectService.getProjects();
@@ -54,7 +51,7 @@ public class ProjectController {
         return projectService.findById(id);
     }
 
-    // @GetMapping("/projects/{id}/sourcefiles")
+    @GetMapping("/projects/{id}/sourcefiles")
     public Set<SourceFile> getProjectSourceFile(@PathVariable String id) {
         return projectService.findById(id).getSourcefiles();
     }
