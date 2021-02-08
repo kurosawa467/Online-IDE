@@ -85,6 +85,15 @@
             </configuration>
           </execution>
           <execution>
+            <id>angular-cli install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install --no-optional -g angular-cli</arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>npm run-script</id>
             <phase>compile</phase>
             <goals>
