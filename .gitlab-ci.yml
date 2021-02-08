@@ -111,13 +111,13 @@ discoveryserver:package:
        #     - discoveryserver/**/*
 gateway:package:
     stage: package
-    script: cd webserver/gateway / && mvn package -DskipTests=true 
+    script: cd gateway / && mvn package -DskipTests=true 
     artifacts:
-      #  paths:
-         #   - gateway/target/*.jar
+        paths:
+            - webserver/gateway/target/*.jar
     only:
-        changes:
-            - gateway/**/*
+     #   changes:
+       #     - webserver/gateway/**/*
 project:package:
     stage: package
     script: cd webserver/project / && mvn package -DskipTests=true
