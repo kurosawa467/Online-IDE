@@ -144,7 +144,7 @@ UIService:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
+        DOCKER_HOST: tcp://docker:2378
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/UIService
     only:
@@ -165,7 +165,7 @@ compiler:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
+        DOCKER_HOST: tcp://docker:2378
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
@@ -186,7 +186,7 @@ discoveryserver:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
+        DOCKER_HOST: tcp://docker:2378
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
@@ -207,7 +207,7 @@ project:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
+        DOCKER_HOST: tcp://docker:2378
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
@@ -228,7 +228,7 @@ dark-mode:publish:
         - docker push $IMAGE_NAME:latest
     variables:
         DOCKER_DRIVER: overlay2
-        DOCKER_HOST: tcp://docker:2375
+        DOCKER_HOST: tcp://docker:2378
         DOCKER_TLS_CERTDIR: ""
         IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
     only:
