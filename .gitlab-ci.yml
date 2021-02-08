@@ -96,7 +96,7 @@ dark-mode:package:
     script: cd dark-mode / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - target/*.jar
+            - webserver/dark-mode/target/*.jar
     only:
        #  changes:
        #     - dark-mode/**/*
