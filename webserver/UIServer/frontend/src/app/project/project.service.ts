@@ -25,7 +25,6 @@ export class ProjectService {
   }
 
   createProject(project: Project): Observable<Project> {
-
     return this.http.post<Project>(this.projectURL, project, httpOptions).pipe();
   }
 

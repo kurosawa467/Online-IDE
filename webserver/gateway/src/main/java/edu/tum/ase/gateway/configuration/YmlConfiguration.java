@@ -3,7 +3,9 @@ package edu.tum.ase.gateway.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "security.oauth2.resource")
