@@ -1,10 +1,10 @@
 image: maven:3.3.9-jdk-8
 
 before_script:
-    - cd $CI_PROJECT_DIR
+    - cd $CI_PROJECT_DIR/webserver
 
 after_script:
-    - cd $CI_PROJECT_DIR
+    - cd $CI_PROJECT_DIR/webserver
 
 stages:
     - build
