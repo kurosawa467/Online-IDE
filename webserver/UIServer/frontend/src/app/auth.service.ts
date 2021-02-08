@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {ReplaySubject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {User} from "./user";
+import {ReplaySubject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {User} from './user';
 
 const LOGIN_PATH = '/login';
 const LOGOUT_PATH = '/logout';
@@ -13,8 +13,8 @@ const LOGOUT_PATH = '/logout';
 export class AuthService {
 
   private authenticated$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  private userId: String;
-  private username: String;
+  private userId: string;
+  private username: string;
 
   public get authenticated(): ReplaySubject<boolean> {
     return this.authenticated$;
@@ -23,22 +23,21 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {
     this.checkAuthentication();
   }
-
-  public checkAuthentication() {
+  public checkAuthentication(): void {
     this.httpClient.get<User>('/authenticated').subscribe((currentUser) => {
       this.authenticated$.next(currentUser.authenticated);
       this.userId = currentUser.userId;
       this.username = currentUser.username;
     }, (err) => {
       this.authenticated$.next(false);
-      this.userId = "";
-      this.username = "";
+      this.userId = '';
+      this.username = '';
     });
   }
 
 
-  public checkValidUserId(userId: string): Promise<String> {
-    return this.httpClient.get<String>('/validUserId/' + userId).toPromise()
+  public checkValidUserId(userId: string): Promise<string> {
+    return this.httpClient.get<string>('/validUserId/' + userId).toPromise()
       .then(validUserId => {
         return validUserId;
       }).catch(error => {
@@ -47,11 +46,11 @@ export class AuthService {
     });
   }
 
-  public getUsername(): String {
+  public getUsername(): string {
     return this.username;
   }
 
-  public getUserId(): String {
+  public getUserId(): string {
     return this.userId;
   }
 

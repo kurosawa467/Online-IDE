@@ -3,7 +3,7 @@ import {ProjectService} from './project.service';
 import {Project} from './project';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
 import {SourceFile} from '../editor/sourcefile';
-import {AuthService} from "../auth.service";
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-project',
@@ -12,8 +12,8 @@ import {AuthService} from "../auth.service";
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
-  currentUserId: String;
-  currentUsername: String;
+  currentUserId: string;
+  currentUsername: string;
   projects: Project[];
   modifyingProject: Project;
   modifying: boolean;
@@ -41,7 +41,7 @@ export class ProjectComponent implements OnInit {
       dictionaries: [adjectives, colors, animals]
     });
     const newSourceFileSet = new Array<SourceFile>();
-    const userIdSet = new Array<String>();
+    const userIdSet = new Array<string>();
     userIdSet.push(this.currentUserId);
 
     // @ts-ignore

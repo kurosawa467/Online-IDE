@@ -4,9 +4,9 @@ import {Project} from '../project/project';
 import {SourceFile} from './sourcefile';
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator';
 import {SourceFileService} from './editor.service';
-import {ProjectService} from "../project/project.service";
-import {AuthService} from "../auth.service";
-import {SourceCode} from "./sourcecode";
+import {ProjectService} from '../project/project.service';
+import {AuthService} from '../auth.service';
+import {SourceCode} from './sourcecode';
 
 @Component({
   selector: 'app-editor',
@@ -72,8 +72,9 @@ export class EditorComponent implements OnInit {
     }
     */
     if (unique) {
-      let tmplanguage =  this.filename.split(".")
-      const newSourceFile: SourceFile = { name: this.filename, sourcecode: '', language: tmplanguage[tmplanguage.length - 1], project: this.project } as SourceFile;
+      let tmplanguage =  this.filename.split('.');
+      const newSourceFile: SourceFile =
+        { name: this.filename, sourcecode: '', language: tmplanguage[tmplanguage.length - 1], project: this.project } as SourceFile;
       // this.sourcefiles.add(newSourceFile);
       console.log('Component: newSourceFile is being created: ' + newSourceFile);
       this.sourceFileService.createSourceFile(newSourceFile).subscribe(sourceFile => this.addSourceFile(sourceFile));
@@ -95,15 +96,15 @@ export class EditorComponent implements OnInit {
 
   showModalShare(): void {
     this.isVisibleShare = true;
-    this.sharedUserId = "";
-    this.sharedUsername = "";
+    this.sharedUserId = '';
+    this.sharedUsername = '';
   }
 
   handleOkShare(): void {
     this.isVisibleShare = false;
     this.authService.checkValidUserId(this.sharedUserId).then(
       validSharedUsername => {
-        if (!(validSharedUsername === "INVALID") && !(validSharedUsername === "")) {
+        if (!(validSharedUsername === 'INVALID') && !(validSharedUsername === '')) {
           this.addProjectSharedUser(this.project, this.sharedUserId);
           this.sharedUsername = validSharedUsername.valueOf();
           this.isVisibleShareSuccess = true;
@@ -153,8 +154,8 @@ export class EditorComponent implements OnInit {
     }
     if (unique) {
       this.renamedFile.name = this.renamed;
-      let tmplanguage =  this.renamed.split(".")
-      this.renamedFile.language = tmplanguage[tmplanguage.length - 1]
+      let tmplanguage =  this.renamed.split('.');
+      this.renamedFile.language = tmplanguage[tmplanguage.length - 1];
       // tslint:disable-next-line:max-line-length
       this.sourceFileService.updateSourceFile(this.renamedFile).subscribe(updatedSourceFile => this.updateSourceFileName(updatedSourceFile));
       this.isVisibleRename = false;
@@ -225,10 +226,10 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  addProjectSharedUser(sharedProject: Project, sharedToUser: String) {
-    const updatedUserSet = new Set<String>(sharedProject.userIds);
+  addProjectSharedUser(sharedProject: Project, sharedToUser: string): void {
+    const updatedUserSet = new Set<string>(sharedProject.userIds);
     updatedUserSet.add(sharedToUser);
-    sharedProject.userIds = Array.from(updatedUserSet) as unknown as Set<String>;
+    sharedProject.userIds = Array.from(updatedUserSet) as unknown as Set<string>;
     this.sourceFileService.updateProject(sharedProject).subscribe(updatedProject => {
       /*
       const index = this.projects.findIndex(project => project.id === this.modifyingProject.id);
