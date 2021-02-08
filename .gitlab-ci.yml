@@ -32,8 +32,8 @@ dark-mode:build:
     stage: build
     script: cd dark-mode / && mvn clean compile
     only:
-        changes:
-            - dark-mode/**/*
+      #  changes:
+        #    - dark-mode/**/*
 
 discoveryserver:build:
     stage: build
@@ -98,8 +98,8 @@ dark-mode:package:
         paths:
             - dark-mode/target/*.jar
     only:
-        changes:
-            - dark-mode/**/*
+      #  changes:
+       #     - dark-mode/**/*
 discoveryserver:package:
     stage: package
     script: cd discoveryserver / && mvn package -DskipTests=true
