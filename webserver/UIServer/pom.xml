@@ -64,6 +64,7 @@
         <configuration>
           <workingDirectory>frontend</workingDirectory>
           <nodeVersion>v14.15.4</nodeVersion>
+          <npmVersion>6.14.10 </npmVersion>
         </configuration>
         <version>1.3</version>
         <executions>
@@ -82,46 +83,6 @@
             <phase>generate-resources</phase>
             <configuration>
               <arguments>install</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm install monaco editor</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <arguments>install --save-dev "monaco-editor@0.17.0"</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm install angular common</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <arguments>install --save-dev "@angular/common@^9.0.0"</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm install angular core</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <arguments>install --save-dev "@angular/core@^9.0.0"</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm install tslib</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <arguments>install --save-dev "@tslib@^1.10.0"</arguments>
             </configuration>
           </execution>
           <execution>
