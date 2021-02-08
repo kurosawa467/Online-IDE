@@ -68,10 +68,10 @@ project:test:
     services:
         - postgres:9.6
     variables:
-        JDBC_URL=jdbc:postgresql://postgres/project_db?user=admin&password=password
-        POSTGRES_DB=project_db
-        POSTGRES_PASSWORD=project_pw
-        POSTGRES_USER=project_user
+        JDBC_URL: jdbc:postgresql://postgres/project_db?user=admin&password=password
+        POSTGRES_DB: project_db
+        POSTGRES_PASSWORD: project_pw
+        POSTGRES_USER: project_user
     only:
         changes:
             - project/**/*
