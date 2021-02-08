@@ -93,13 +93,13 @@ compiler:package:
             - compiler/**/*
 dark-mode:package:
     stage: package
-    script: cd $CI_PROJECT_DIR/dark-mode / && mvn package -DskipTests=true
+    script: cd dark-mode / && mvn package -DskipTests=true
     artifacts:
         paths:
-            - dark-mode/target/*.jar
+            - target/*.jar
     only:
-         changes:
-            - dark-mode/**/*
+       #  changes:
+       #     - dark-mode/**/*
 discoveryserver:package:
     stage: package
     script: cd discoveryserver / && mvn package -DskipTests=true
