@@ -250,8 +250,8 @@ deploy:gcp:
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
         - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
         - scp -r docker-compose.prod.yml $SSH_HOST:~/
-        - ssh -t $SSH_HOST "sudo docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-        - ssh -t $SSH_HOST "sudo docker-compose -f docker-compose.prod.yml pull && sudo docker-compose -f docker-compose.prod.yml up --force-recreate-d"
+        - ssh $SSH_HOST "sudo -n docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+        - ssh $SSH_HOST "sudo -n docker-compose -f docker-compose.prod.yml pull && sudo docker-compose -f docker-compose.prod.yml up --force-recreate-d"
     variables:
         SSH_HOST: behl_alexander@34.107.8.134
     only:
