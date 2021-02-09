@@ -18,15 +18,15 @@ UIServer:build:
     stage: build
     script: cd UIServer / && mvn clean compile
     only:
-       # changes:
-        #   - UIServer/**/*
+        changes:
+           - UIServer/**/*
 
 compiler:build:
     stage: build
     script: cd compiler / && mvn clean compile
     only:
-       # changes:
-         #   - compiler/**/*
+        changes:
+            - compiler/**/*
 
 dark-mode:build:
     stage: build
@@ -46,8 +46,8 @@ gateway:build:
     stage: build
     script: cd gateway / && mvn clean compile -P prod
     only:
-      #  changes:
-        #    - gateway/**/*
+        changes:
+            - gateway/**/*
 
 project:build:
     stage: build
@@ -68,8 +68,8 @@ project:test:
         POSTGRES_PASSWORD: project_pw
         POSTGRES_USER: project_user
     only:
-       # changes:
-        #    - project/**/*
+        changes:
+            - project/**/*
 
 #package jobs
 UIServer:package:
@@ -79,8 +79,8 @@ UIServer:package:
         paths:
             - webserver/UIServer/target/*.jar
     only:
-      #  changes:
-       #     - UIServer/**/*
+        changes:
+            - UIServer/**/*
 compiler:package:
     stage: package
     script: cd compiler / && mvn package -DskipTests=true
@@ -88,8 +88,8 @@ compiler:package:
         paths:
             - webserver/compiler/target/*.jar
     only:
-        #changes:
-        #    - compiler/**/*
+        changes:
+            - compiler/**/*
 
 dark-mode:package:
     stage: package
@@ -98,8 +98,8 @@ dark-mode:package:
         paths:
             - webserver/dark-mode/target/*.jar
     only:
-        # changes:
-        #    - dark-mode/**/*
+         changes:
+            - dark-mode/**/*
 
 discoveryserver:package:
     stage: package
@@ -108,8 +108,8 @@ discoveryserver:package:
         paths:
             - webserver/discoveryserver/target/*.jar
     only:
-       # changes:
-         #   - discoveryserver/**/*
+        changes:
+            - discoveryserver/**/*
 gateway:package:
     stage: package
     script: cd gateway / && mvn package -DskipTests=true 
@@ -117,8 +117,8 @@ gateway:package:
         paths:
             - webserver/gateway/target/*.jar
     only:
-       # changes:
-        #    - gateway/**/*
+        changes:
+            - gateway/**/*
 project:package:
     stage: package
     script: cd project / && mvn package -DskipTests=true
@@ -126,8 +126,8 @@ project:package:
         paths:
             - webserver/project/target/*.jar
     only:
-        #changes:
-        #    - project/**/*       
+        changes:
+            - project/**/*       
 
 #publish jobs
 UIService:publish:
@@ -146,8 +146,8 @@ UIService:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/uiserver
     only:
-       # changes:
-        #    - UIServer/**/*
+        changes:
+            - UIServer/**/*
 compiler:publish:
     stage: publish
     image: docker:stable
@@ -164,8 +164,8 @@ compiler:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/compiler
     only:
-        #changes:
-         #   - UIServer/**/*
+        changes:
+           - UIServer/**/*
 dark-mode:publish:
     stage: publish
     image: docker:stable
@@ -182,8 +182,8 @@ dark-mode:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/dark-mode
     only:
-       # changes:
-          #  - dark-mode/**/*
+        changes:
+            - dark-mode/**/*
 gateway:publish:
     stage: publish
     image: docker:stable
@@ -200,8 +200,8 @@ gateway:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/gateway
     only:
-       # changes:
-        #    - gateway/**/*
+        changes:
+            - gateway/**/*
 discoveryserver:publish:
     stage: publish
     image: docker:stable
@@ -218,8 +218,8 @@ discoveryserver:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/discoveryserver
     only:
-       # changes:
-        #    - discoveryserver/**/*
+        changes:
+            - discoveryserver/**/*
 project:publish:
     stage: publish
     image: docker:stable
@@ -236,8 +236,8 @@ project:publish:
         DOCKER_HOST: tcp://docker:2375
         IMAGE_NAME: $CI_REGISTRY_IMAGE/project
     only:
-       # changes:
-         #   - project/**/*
+        changes:
+            - project/**/*
 #deploy job
 deploy:gcp:
     stage: deploy
