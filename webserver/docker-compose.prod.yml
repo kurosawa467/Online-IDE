@@ -1,58 +1,40 @@
 version: '3.7'
 services:
   discovery-service:
-    build:
-      dockerfile: Dockerfile
-      context: ./discoveryserver
-    image: discoveryserver:latest
+    image: gitlab.lrz.de:5005/ase20-group3-2/onlineide/discoveryserver
     restart: on-failure
     ports:
       - 8761:8761
   gateway:
-    build:
-      dockerfile: Dockerfile
-      context: ./gateway
-    image: gateway:latest
+    image: gitlab.lrz.de:5005/ase20-group3-2/onlineide/gateway
     restart: on-failure
     ports:
       - 8080:8080
     environment:
       - EUREKA_SERVER=http://discovery-service:8761/eureka
   dark-mode:
-    build:
-      dockerfile: Dockerfile
-      context: ./dark-mode
-    image: dark-mode:latest
+    image: gitlab.lrz.de:5005/ase20-group3-2/onlineide/dark-mode
     restart: on-failure
     ports:
       - 8000:8000
     environment:
       - EUREKA_SERVER=http://discovery-service:8761/eureka
   ui:
-    build:
-      dockerfile: Dockerfile
-      context: ./UIServer
-    image: ui:latest
+    image: gitlab.lrz.de:5005/ase20-group3-2/onlineide/ui
     restart: on-failure
     ports:
       - 9400:9400
     environment:
       - EUREKA_SERVER=http://discovery-service:8761/eureka
   compiler:
-    build:
-      dockerfile: Dockerfile
-      context: ./compiler
-    image: compiler:latest
+    image: gitlab.lrz.de:5005/ase20-group3-2/onlineide/compiler
     restart: on-failure
     ports:
       - 7000:7000
     environment:
       - EUREKA_SERVER=http://discovery-service:8761/eureka
   project:
-    build:
-      dockerfile: Dockerfile
-      context: ./project
-    image: project:latest
+    image: gitlab.lrz.de:5005/ase20-group3-2/onlineide/project
     restart: on-failure
     depends_on:
       - db
